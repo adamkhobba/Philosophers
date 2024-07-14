@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/07/13 16:09:39 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/14 16:18:50 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,22 @@
 #define BYELLOW	"\e[1;33m"
 #define RED	"\e[31m"
 #define GREEN	"\e[32m"
+
 typedef struct s_philo
 {
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
 	pthread_t		thread;
-	pthread_mutex_t *forks;
+	int 			num_times_to_eat;
+	size_t			time_to_die;
+	pthread_mutex_t forks;
+	pthread_mutex_t forks_l;
+	int 			index_of_philo;
 }					t_philo;
 
 typedef struct s_data
 {
 	int				dead_flag;
-	size_t			time_to_die;
-	int 			num_times_to_eat;
-	size_t			time_to_eat;
-	size_t			time_to_sleep;
 	int				num_of_philos;
 	t_philo			*philos;
 }					t_data;
@@ -44,5 +47,6 @@ typedef struct s_data
 int ft_parsing(char **input, int c);
 long	ft_atoi(const char *nptr);
 void *ft_philos_routine(void *args);
+int	ft_usleep(size_t milliseconds);
 
 #endif

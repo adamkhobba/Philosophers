@@ -6,15 +6,14 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:12:17 by adam              #+#    #+#             */
-/*   Updated: 2024/07/13 19:06:26 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/14 16:14:30 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/philosophers.h"
 
-void ft_init_struct(char **av, int ac, t_data *data)
+void ft_init_struct(char **av, int ac, t_philo *data)
 {
-    data->dead_flag = 1;
         data->time_to_die  = ft_atoi(av[2]);
         data->time_to_eat = ft_atoi(av[3]);
         data->time_to_sleep  = ft_atoi(av[4]);
@@ -24,9 +23,13 @@ void ft_init_struct(char **av, int ac, t_data *data)
             data->num_times_to_eat = -1;
 }
 
+void ft_free_data(t_data *data)
+{
+    free(data->philos);
+}
+
 int main (int ac, char **av)
 {
-    pthread_t *philo_thread;
     t_data data;
     t_data *pdata;
     int i;
@@ -34,34 +37,41 @@ int main (int ac, char **av)
     if (!ft_parsing(av, ac))
         return (1);
     pdata = &data;
-    ft_init_struct(av, ac, &data);
-    printf("%screating of mutex %s\n", YELLOW, NC);
+    pdata->dead_flag = 1;
     i = 0;
     pdata->num_of_philos = ft_atoi(av[1]);
-    philo_thread = malloc(sizeof(pthread_t) * (pdata->num_of_philos + 1)); 
-    pdata->forks = malloc(sizeof(pthread_mutex_t) * pdata->num_of_philos);
+    pdata->philos = malloc(sizeof(t_philo) * (pdata->num_of_philos)); 
+    printf("%screating of mutex %s\n", YELLOW, NC);
     while (i < pdata->num_of_philos)
     {
-        pthread_mutex_init(&pdata->forks[i], NULL);
-        i++;
-    }
-    i = 0;
-    while (i < pdata->num_of_philos + 1)
-    {
-        pthread_create(&philo_thread[i], NULL, &ft_philos_routine, pdata);
-        i++;
-    }
-    i = 0;
-    while (i < pdata->num_of_philos + 1)
-    {
-        pthread_join(philo_thread[i],NULL);
+        ft_init_struct(av, ac, &data);
+        if (pthread_mutex_init(&pdata->philos[i].forks, NULL))
+            return (1); // freeing before exite the program 
+        pdata->philos[i].forks_l = pdata->philos[(i + 1) % pdata->num_of_philos].forks;
         i++;
     }
     i = 0;
     while (i < pdata->num_of_philos)
     {
-        pthread_mutex_destroy(&pdata->forks[i]);
+        pdata->philos[i].index_of_philo = i;
+        if(pthread_create(&pdata->philos[i].thread, NULL, &ft_philos_routine, &pdata->philos[i]))
+            return (1); // freeing before exite the program 
         i++;
     }
+    i = 0;
+    while (i < pdata->num_of_philos)
+    {
+        if (pthread_join(pdata->philos[i].thread,NULL))
+            return (1); // freeing before exite the program
+        i++;
+    }
+    i = 0;
+    while (i < pdata->num_of_philos)
+    {
+        if (pthread_mutex_destroy(&pdata->philos[i].forks))
+            return (1); // freeing before exite the program
+        i++;
+    }
+    ft_free_data(pdata);
     return (0);
 }
