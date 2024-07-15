@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:44 by adam              #+#    #+#             */
-/*   Updated: 2024/07/15 10:53:58 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/15 16:16:31 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int ft_isnull(char **input, char c)
     if (c == 5)
         while (i < c)
         {
-            printf("input[i] %ld\n", ft_atoi(input[i]));
             if (ft_atoi(input[i]) == 0)
                 return (0);
             i++;
