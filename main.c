@@ -6,11 +6,11 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:12:17 by adam              #+#    #+#             */
-/*   Updated: 2024/07/14 18:17:46 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/15 11:28:09 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/philosophers.h"
+#include "philosophers.h"
 
 void ft_init_struct(char **av, int ac, t_philo *data)
 {
@@ -58,10 +58,11 @@ int main (int ac, char **av)
     i = 0;
     while (i < pdata->num_of_philos)
     {
-        pdata->philos[i].index_of_philo = i;
+
         if(pthread_create(&pdata->philos[i].thread, NULL,
             &ft_philos_routine, &pdata->philos[i]))
             return (1); // freeing before exite the program 
+        pdata->philos[i].index_of_philo = i;
         i++;
     }
     i = 0;

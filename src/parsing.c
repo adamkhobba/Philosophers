@@ -6,11 +6,11 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:44 by adam              #+#    #+#             */
-/*   Updated: 2024/07/13 12:14:25 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/15 10:53:58 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosophers.h"
+#include "philosophers.h"
 
 int ft_args_nbr(int c )
 {

@@ -6,11 +6,11 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:10:29 by adam              #+#    #+#             */
-/*   Updated: 2024/07/14 16:18:27 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/15 10:53:58 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosophers.h"
+#include "philosophers.h"
 
 
 size_t	get_current_time(void)

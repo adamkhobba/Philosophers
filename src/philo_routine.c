@@ -6,23 +6,31 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:24:27 by adam              #+#    #+#             */
-/*   Updated: 2024/07/14 18:23:10 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/15 11:12:49by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosophers.h"
+#include "philosophers.h"
 
 void ft_eat(t_philo *data)
 {
     pthread_mutex_lock(data->forks_l); 
     printf("threar %d is taking a fork left\n", data->index_of_philo);
     pthread_mutex_lock(&data->forks);
+    data->last_meal = data->current_meal;
+    data->current_meal = get_current_time();
+    if (data->current_meal - data->last_meal > data->time_to_die)
+    {
+            printf("thread %d is dead\n", data->index_of_philo);
+            exit(1);
+    }
     printf("threar %d is taking a fork right\n", data->index_of_philo);
     printf("thread %d is eating\n", data->index_of_philo);
     ft_usleep(data->time_to_eat);
     pthread_mutex_unlock(&data->forks);
     pthread_mutex_unlock(data->forks_l);
 }
+
 void *ft_philos_routine(void *args)
 {
     t_philo *data;
@@ -32,6 +40,7 @@ void *ft_philos_routine(void *args)
     data = (t_philo *)args;
     if (data->index_of_philo % 2 == 0)
         ft_usleep(60);
+    data->current_meal = get_current_time();
     while (1)
     {
         //eat
@@ -41,9 +50,7 @@ void *ft_philos_routine(void *args)
         ft_usleep(data->time_to_sleep);
         //think
         printf("thread %d is thinking\n", data->index_of_philo);
-        // sleep(3);
-        // pthread_mutex_lock(&data->philos[0].forks);
-        // pthread_mutex_unlock(&data->philos[0].forks);
+        sleep(2);
         i++;
     }
     return (NULL); 

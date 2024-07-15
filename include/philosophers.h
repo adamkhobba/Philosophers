@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/07/14 18:17:41 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/15 11:24:53 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,18 @@
 
 typedef struct s_philo
 {
-	size_t			time_to_eat;
-	size_t			time_to_sleep;
 	pthread_t		thread;
-	int 			num_times_to_eat;
-	size_t			time_to_die;
 	pthread_mutex_t forks;
 	pthread_mutex_t *forks_l;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
+	size_t			time_to_die;
+	size_t			last_meal;
+	size_t			current_meal;
+	int				start_time;
+	int				nbr;
+	int				nbr_late;
+	int 			num_times_to_eat;
 	int 			index_of_philo;
 }					t_philo;
 
@@ -48,5 +53,6 @@ int ft_parsing(char **input, int c);
 long	ft_atoi(const char *nptr);
 void *ft_philos_routine(void *args);
 int	ft_usleep(size_t milliseconds);
+size_t	get_current_time(void);
 
 #endif

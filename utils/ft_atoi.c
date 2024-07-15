@@ -6,11 +6,11 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:06:56 by adam              #+#    #+#             */
-/*   Updated: 2024/07/12 16:07:10 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/15 10:53:58 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosophers.h"
+#include "philosophers.h"
 
 long	ft_atoi(const char *nptr)
 {
