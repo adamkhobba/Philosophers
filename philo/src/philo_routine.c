@@ -37,15 +37,15 @@ void *ft_philos_routine(void *args)
     if (data->index_of_philo % 2 == 0)
         ft_usleep(60);
     data->current_meal = get_current_time();
-    while (1)
+    while (data->data->dead_flag)
     {
         //eat
         ft_eat(data);
         //sleep
-        printf("thread %d is sleeping\n", data->index_of_philo);
+        printf("%sthread %d is sleeping\n%s", YELLOW, data->index_of_philo , NC);
         ft_usleep(data->data->time_to_sleep);
         //think
-        printf("thread %d is thinking\n", data->index_of_philo);
+        printf("%sthread %d is thinking%s\n", GREEN, data->index_of_philo, NC);
         // sleep(2);
         i++;
     }

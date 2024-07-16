@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:12:17 by adam              #+#    #+#             */
-/*   Updated: 2024/07/15 16:49:07 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/16 12:01:22 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ int ft_free_mutex(t_data *data)
 }
 int main (int ac, char **av)
 {
-    t_data data;
-    t_data *pdata;
-    pthread_t monitor;
-    int i;
+    t_data      data;
+    t_data      *pdata;
+    void        *ret;
+    pthread_t   monitor;
+    int         i;
 
     if (!ft_parsing(av, ac))
         return (1);    
@@ -79,19 +80,29 @@ int main (int ac, char **av)
     pdata->dead_flag = 1;
     pdata->num_of_philos = ft_atoi(av[1]);
     pdata->philos = malloc(sizeof(t_philo) * (pdata->num_of_philos));
-    printf("%screating of mutex %s\n", YELLOW, NC);
     ft_creation_of_philo(pdata);
     if(pthread_create(&monitor, NULL, &ft_monitoring,pdata))
         return (1); // freeing before exite the program 
     i = 0;
     while (i < pdata->num_of_philos)
     {
-        if (pthread_join(pdata->philos[i].thread,NULL))
+        if (pthread_join(pdata->philos[i].thread, NULL))
             return (1); // freeing before exite the program
+        // if  (*(int *)ret[i] == 1)
+        // {
+        //     pdata->dead_flag = 0;
+        //     break;
+        // }
         i++;
     }
-    if (pthread_join(monitor, NULL))
+    if (pthread_join(monitor, &ret))
         return (1); // freeing before exite the program
+    printf("ret =%d\n", *(int *)ret);
+    if(*(int *)ret == 0);
+    {
+        pdata->philos[i].data->dead_flag = 0;
+        return (1);
+    }
     ft_free_mutex(pdata);
     ft_free_data(pdata);
     return (0);
