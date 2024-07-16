@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:32:48 by adam              #+#    #+#             */
-/*   Updated: 2024/07/15 16:55:28 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/15 17:08:53 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void *ft_monitoring(void *arg)
                 data->philos[i].last_meal);
             if (data->philos[i].current_meal - data->philos[i].last_meal >= data->time_to_die)
             {
-             printf("thread %d is dead\n", data->philos[i].index_of_philo);
-                exit(1);
+                printf("thread %d is dead\n", data->philos[i].index_of_philo);
+                return ((void *)1);
             }
+            ft_usleep(100);
             i++;
-            ft_usleep(1000);
         }
     }
     return (0);
