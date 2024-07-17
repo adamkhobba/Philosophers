@@ -22,16 +22,19 @@ int ft_monitoring(void *arg)
     while (data->dead_flag)
     {
         i = 0;
+        while (!data->philos[i].last_meal)
+            ft_usleep(100);
+        i = 0;
         while(i < data->num_of_philos)
         {
-            printf("current = %zu\n", data->philos[i].current_meal -
+            printf("current = %zu\n", get_current_time() -
                 data->philos[i].last_meal);
-            if (data->philos[i].current_meal - data->philos[i].last_meal >= data->time_to_die)
+            if (get_current_time() - data->philos[i].last_meal >= data->time_to_die)
             {
                 printf("%sthread %d is dead%s\n", RED, data->philos[i].index_of_philo, NC);
                 return (1);
             }
-            ft_usleep(data->time_to_die / 3);
+            ft_usleep(data->time_to_die / 3 );
             i++;
         }
     }

@@ -18,8 +18,7 @@ void ft_eat(t_philo *data)
     printf("threar %d is taking a fork left\n", data->index_of_philo);
     pthread_mutex_lock(&data->forks);
     printf("threar %d is taking a fork right\n", data->index_of_philo);
-    data->last_meal = data->current_meal;
-    data->current_meal = get_current_time();
+    data->last_meal = get_current_time();
     printf("thread %d is eating\n", data->index_of_philo);
     ft_usleep(data->data->time_to_eat);
     pthread_mutex_unlock(&data->forks);
@@ -35,7 +34,7 @@ void *ft_philos_routine(void *args)
     data = (t_philo *)args;
     if (data->index_of_philo % 2 == 0)
         ft_usleep(60);
-    data->current_meal = get_current_time();
+    data->last_meal = get_current_time();
     while (data->data->dead_flag)
     {
         //eat

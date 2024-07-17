@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:12:17 by adam              #+#    #+#             */
-/*   Updated: 2024/07/16 14:46:22 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/17 13:38:14 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ int main (int ac, char **av)
     pdata->num_of_philos = ft_atoi(av[1]);
     pdata->philos = malloc(sizeof(t_philo) * (pdata->num_of_philos));
     ft_creation_of_philo(pdata);
-    if(pthread_create(&monitor, NULL, &ft_monitoring,pdata))
-        return (1); // freeing before exite the program 
     if (ft_monitoring(pdata))
         return (1);
     i = 0;
@@ -90,11 +88,6 @@ int main (int ac, char **av)
     {
         if (pthread_join(pdata->philos[i].thread, NULL))
             return (1); // freeing before exite the program
-        // if  (*(int *)ret[i] == 1)
-        // {
-        //     pdata->dead_flag = 0;
-        //     break;
-        // }
         i++;
     }
     ft_free_mutex(pdata);
