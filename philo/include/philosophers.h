@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/07/15 16:47:01 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/16 14:46:40 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ long	ft_atoi(const char *nptr);
 void *ft_philos_routine(void *args);
 int	ft_usleep(size_t milliseconds);
 size_t	get_current_time(void);
-void *ft_monitoring(void *data);
+int ft_monitoring(void *data);
 
 #endif

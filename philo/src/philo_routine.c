@@ -20,7 +20,6 @@ void ft_eat(t_philo *data)
     printf("threar %d is taking a fork right\n", data->index_of_philo);
     data->last_meal = data->current_meal;
     data->current_meal = get_current_time();
-    
     printf("thread %d is eating\n", data->index_of_philo);
     ft_usleep(data->data->time_to_eat);
     pthread_mutex_unlock(&data->forks);

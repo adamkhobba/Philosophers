@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:12:17 by adam              #+#    #+#             */
-/*   Updated: 2024/07/16 12:01:22 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/16 14:46:22 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int main (int ac, char **av)
     ft_creation_of_philo(pdata);
     if(pthread_create(&monitor, NULL, &ft_monitoring,pdata))
         return (1); // freeing before exite the program 
+    if (ft_monitoring(pdata))
+        return (1);
     i = 0;
     while (i < pdata->num_of_philos)
     {
@@ -94,14 +96,6 @@ int main (int ac, char **av)
         //     break;
         // }
         i++;
-    }
-    if (pthread_join(monitor, &ret))
-        return (1); // freeing before exite the program
-    printf("ret =%d\n", *(int *)ret);
-    if(*(int *)ret == 0);
-    {
-        pdata->philos[i].data->dead_flag = 0;
-        return (1);
     }
     ft_free_mutex(pdata);
     ft_free_data(pdata);

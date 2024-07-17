@@ -13,13 +13,11 @@
 #include "philosophers.h"
 
 
-void *ft_monitoring(void *arg)
+int ft_monitoring(void *arg)
 {
     int i;
     t_data *data;
-    int *result;
 
-    result = malloc(sizeof(int));
     data = (t_data *)arg;
     while (data->dead_flag)
     {
@@ -31,10 +29,9 @@ void *ft_monitoring(void *arg)
             if (data->philos[i].current_meal - data->philos[i].last_meal >= data->time_to_die)
             {
                 printf("%sthread %d is dead%s\n", RED, data->philos[i].index_of_philo, NC);
-                *result = 1;
-                return ((void *)(result));
+                return (1);
             }
-            ft_usleep(data->time_to_die / 2);
+            ft_usleep(data->time_to_die / 3);
             i++;
         }
     }
