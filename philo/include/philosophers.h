@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/07/17 16:59:16 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/18 06:58:08 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ typedef struct s_data
 	t_philo			*philos;
 }					t_data;
 
+//src
 int ft_parsing(char **input, int c);
-long	ft_atoi(const char *nptr);
 void *ft_philos_routine(void *args);
 int	ft_usleep(size_t milliseconds);
 size_t	get_current_time(void);
 int ft_monitoring(void *data);
 
+// utils
+long	ft_atoi(const char *nptr);
+int		ft_strlen(char *str);
 #endif

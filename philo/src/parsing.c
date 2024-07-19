@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:44 by adam              #+#    #+#             */
-/*   Updated: 2024/07/15 16:16:31 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/18 06:56:54 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,36 @@ int ft_isnull(char **input, char c)
     return (1);
 }
 
+int ft_check_negative(char **input, int c)
+{
+    int i;
+    int j;
+
+    i = 1;
+    while (i < c)
+    {
+        j = 0;
+        if (input[i][j] == '-')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+int ft_check_max(char **input, int c)
+{
+    int i;
+
+    i = 1;
+    while (i < c)
+    {
+        if (ft_strlen(input[i]) > 10)
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 int ft_parsing(char **input, int c)
 {
     if (!ft_args_nbr(c))
@@ -77,6 +107,10 @@ int ft_parsing(char **input, int c)
     if (!ft_big_isdigit(input, c))
         return (0);
     if (!ft_isnull(input, c))
+        return (0);
+    if (!ft_check_negative(input, c))
+        return (0);
+    if (!ft_check_max(input, c))
         return (0);
     return (1);
 }
