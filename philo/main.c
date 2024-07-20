@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:12:17 by adam              #+#    #+#             */
-/*   Updated: 2024/07/20 16:36:45 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/20 19:00:45 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int ft_creation_of_philo(t_data *data)
     while (i < data->num_of_philos)
     {
         if (pthread_mutex_init(&data->philos[i].forks, NULL))
-            return (1); // freeing before exite the program 
+        {
+            ft_free_mutex(data, i);
+            return (1);
+        }
         data->philos[i].forks_l = &data->philos[(i + 1) % data->num_of_philos].forks;
         i++;
     }
@@ -31,7 +34,10 @@ int ft_creation_of_philo(t_data *data)
         data->philos[i].data = data;
         if(pthread_create(&data->philos[i].thread, NULL,
             &ft_philos_routine, &data->philos[i]))
-            return (1); // freeing before exite the program 
+            {
+                ft_free_mutex(data, i);
+                return (1);
+            }
         data->philos[i].index_of_philo = i + 1;
         i++;
     }
@@ -41,6 +47,7 @@ int ft_creation_of_philo(t_data *data)
 void ft_init_struct(char **av, int ac, t_data *data)
 {
         data->time_to_die  = ft_atoi(av[2]);
+        ft_set_dead(data, 1);
         data->time_to_eat = ft_atoi(av[3]);
         data->time_to_sleep  = ft_atoi(av[4]);
         if (ac == 6)
@@ -49,23 +56,6 @@ void ft_init_struct(char **av, int ac, t_data *data)
             data->num_times_to_eat = -1;
 }
 
-void ft_free_data(t_data *data)
-{
-    free(data->philos);
-}
-int ft_free_mutex(t_data *data)
-{
-    int i;
-
-    i = 0;
-    while (i < data->num_of_philos)
-    {
-        if (pthread_mutex_destroy(&data->philos[i].forks))
-            return (1); // freeing before exite the program
-        i++;
-    }
-    return (0);
-}
 int main (int ac, char **av)
 {
     t_data      data;
@@ -88,10 +78,13 @@ int main (int ac, char **av)
     while (i < pdata->num_of_philos)
     {
         if (pthread_join(pdata->philos[i].thread, NULL))
-            return (1); // freeing before exite the program
+        {
+            ft_free_mutex(pdata, i);
+            return (1);
+        }
         i++;
     }
-    ft_free_mutex(pdata);
+    ft_free_mutex(pdata, data.num_of_philos - 1);
     ft_free_data(pdata);
     return (0);
 }

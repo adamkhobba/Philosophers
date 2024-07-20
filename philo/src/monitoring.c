@@ -25,6 +25,18 @@ int ft_stop(t_data *data)
     }
     return (1);
 }
+void ft_set_dead(t_data *data, int value)
+{
+    int i;
+
+    i = 0;
+    while (i < data->num_of_philos)
+    {
+        data->philos[i].dead = value;
+        i++;
+    }
+}
+// my program shouldn't print after the philo died
 
 int ft_monitoring(void *arg)
 {
@@ -39,13 +51,14 @@ int ft_monitoring(void *arg)
         i = 0;
         while(i < data->num_of_philos)
         {
-            // printf("current = %zu\n", get_current_time() -
-            //     data->philos[i].last_meal);
             if (get_current_time() - data->philos[i].last_meal >= data->time_to_die)
             {
+                data->dead_flag = 0;
+                ft_set_dead(data, 0); 
                 printf("%s %zu %d died %s\n", RED,
-                (get_current_time() - data->philos[i].start_time),
-            data->philos[i].index_of_philo, NC);
+                    (get_current_time() - data->philos[i].start_time),
+                    data->philos[i].index_of_philo, NC);
+                
                 return (1);
             }
             i++;
