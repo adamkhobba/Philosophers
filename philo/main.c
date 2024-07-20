@@ -41,13 +41,13 @@ int ft_creation_of_philo(t_data *data)
         data->philos[i].index_of_philo = i + 1;
         i++;
     }
+    ft_set_dead(data, 1);
     return (0);
 }
 
 void ft_init_struct(char **av, int ac, t_data *data)
 {
         data->time_to_die  = ft_atoi(av[2]);
-        ft_set_dead(data, 1);
         data->time_to_eat = ft_atoi(av[3]);
         data->time_to_sleep  = ft_atoi(av[4]);
         if (ac == 6)

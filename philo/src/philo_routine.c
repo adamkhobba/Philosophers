@@ -17,10 +17,10 @@ void ft_eat(t_philo *data)
     pthread_mutex_lock(data->forks_l); 
     pthread_mutex_lock(&data->forks);
     data->last_meal = get_current_time();
-    // if (data->dead)
+    if (data->dead)
         printf("%s %zu %d has taken a fork\n%s", BLUE,
             get_current_time() - data->start_time, data->index_of_philo, NC);
-    // if (data->dead)
+    if (data->dead)
         printf("%s %zu %d is eating\n%s", CYAN, 
             get_current_time() - data->start_time, data->index_of_philo, NC);
     ft_usleep(data->data->time_to_eat);
@@ -35,17 +35,18 @@ void *ft_philos_routine(void *args)
     
     i = 0;
     data = (t_philo *)args;
+    ft_set_dead(data->data, 1);
     if (data->index_of_philo % 2 == 0)
         ft_usleep(60);
     data->last_meal = get_current_time();
     while (data->data->dead_flag)
     {
         ft_eat(data);
-        // if (data->dead)
+        if (data->dead)
             printf("%s %zu %d is sleeping\n%s", YELLOW,
                 get_current_time() - data->start_time, data->index_of_philo, NC);
         ft_usleep(data->data->time_to_sleep);
-        // if(data->dead)
+        if(data->dead)
             printf("%s %zu %d is thinking%s\n", GREEN,
                 (get_current_time() - data->start_time), data->index_of_philo, NC);
         i++;
