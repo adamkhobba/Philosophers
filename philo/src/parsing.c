@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:44 by adam              #+#    #+#             */
-/*   Updated: 2024/07/18 06:56:54 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/19 09:46:11 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int ft_check_max(char **input, int c)
     while (i < c)
     {
         if (ft_strlen(input[i]) > 10)
+            return (0);
+        if (ft_atoi(input[i]) > INT_MAX)
             return (0);
         i++;
     }

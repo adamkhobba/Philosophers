@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/07/18 06:58:08 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/19 19:10:56 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <stddef.h>
-#include <sys/time.h>
+# include <sys/time.h>
+# include <limits.h>
 
 #define NC	"\e[0m"
 #define YELLOW	"\e[33m"
@@ -33,7 +34,7 @@ typedef struct s_philo
 	pthread_mutex_t *forks_l;
 	size_t			last_meal;
 	size_t			current_meal;
-	int				start_time;
+	size_t				start_time;
 	int				full;
 	int 			index_of_philo;
 	struct s_data			*data;
