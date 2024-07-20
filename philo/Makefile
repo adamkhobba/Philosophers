@@ -26,7 +26,7 @@ INC = -I./include
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJ} -pthread  -fsanitize=thread -g
+	${CC} ${CFLAGS} -o ${NAME} ${OBJ} -pthread  -fsanitize=thread -g3
 
 %.o: %.c
 	${CC} ${CFLAGS} $(INC) -c $< -o $@

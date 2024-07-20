@@ -12,6 +12,22 @@
 
 #include "philosophers.h"
 
+void ft_eat_v2(t_philo *data)
+{
+    pthread_mutex_lock(&data->forks); 
+    pthread_mutex_lock(data->forks_l);
+    data->last_meal = get_current_time();
+    if (data->dead)
+        printf("%s %zu %d has taken a fork\n%s", BLUE,
+            get_current_time() - data->start_time, data->index_of_philo, NC);
+    if (data->dead)
+        printf("%s %zu %d is eating\n%s", CYAN, 
+            get_current_time() - data->start_time, data->index_of_philo, NC);
+    ft_usleep(data->data->time_to_eat);
+    pthread_mutex_unlock(data->forks_l);
+    pthread_mutex_unlock(&data->forks);
+}
+
 void ft_eat(t_philo *data)
 {
     pthread_mutex_lock(data->forks_l); 
@@ -41,7 +57,12 @@ void *ft_philos_routine(void *args)
     data->last_meal = get_current_time();
     while (data->data->dead_flag)
     {
-        ft_eat(data);
+        if (!data->dead)
+            break ;
+        if (data->index_of_philo % 2 == 0)
+            ft_eat(data);
+        else 
+            ft_eat_v2(data);
         if (data->dead)
             printf("%s %zu %d is sleeping\n%s", YELLOW,
                 get_current_time() - data->start_time, data->index_of_philo, NC);
