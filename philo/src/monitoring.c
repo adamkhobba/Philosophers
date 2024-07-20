@@ -12,7 +12,6 @@
 
 #include "philosophers.h"
 
-
 int ft_stop(t_data *data)
 {
     int i;
@@ -51,7 +50,7 @@ int ft_monitoring(void *arg)
             }
             i++;
         }
-            ft_usleep(data->time_to_die / 3);
+        usleep(500);
     }
     return (0);
 }

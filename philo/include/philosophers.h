@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/07/19 19:10:56 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/20 16:41:08 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #define BLUE "\033[34m"
 #define RED	"\e[31m"
 #define GREEN	"\e[32m"
+#define CYAN    "\033[36m"
 
 typedef struct s_philo
 {
@@ -51,6 +52,7 @@ typedef struct s_data
 	int				nbr_limits_meals;
 	int				start;
 	int				end;	
+	pthread_mutex_t	*mutex;
 	t_philo			*philos;
 }					t_data;
 

@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:12:17 by adam              #+#    #+#             */
-/*   Updated: 2024/07/19 19:13:44 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/20 16:36:45 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int ft_creation_of_philo(t_data *data)
     while (i < data->num_of_philos)
     {
         data->philos[i].start_time = get_current_time();
-        printf("\n%zu\n", data->philos[i].start_time);
-        //eat
         data->philos[i].data = data;
         if(pthread_create(&data->philos[i].thread, NULL,
             &ft_philos_routine, &data->philos[i]))
@@ -72,8 +70,6 @@ int main (int ac, char **av)
 {
     t_data      data;
     t_data      *pdata;
-    void        *ret;
-    pthread_t   monitor;
     int         i;
 
     if (!ft_parsing(av, ac))
@@ -82,7 +78,7 @@ int main (int ac, char **av)
     ft_init_struct(av, ac, pdata);
     pdata->dead_flag = 1;
     pdata->num_of_philos = ft_atoi(av[1]);
-    pdata->philos = malloc(sizeof(t_philo) * (pdata->num_of_philos));
+    pdata->philos = (t_philo *)malloc(sizeof(t_philo) * (pdata->num_of_philos));
     if (!pdata->philos)
         return (1);
     ft_creation_of_philo(pdata);
