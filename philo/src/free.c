@@ -16,6 +16,7 @@ void ft_free_data(t_data *data)
 {
     free(data->philos);
 }
+
 int ft_free_mutex(t_data *data, int lim)
 {
     int i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/07/20 19:01:21 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/21 19:27:14 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t forks;
 	pthread_mutex_t *forks_l;
+	pthread_mutex_t locker;
 	size_t			last_meal;
 	size_t			current_meal;
 	size_t			start_time;
@@ -53,7 +54,7 @@ typedef struct s_data
 	int				nbr_limits_meals;
 	int				start;
 	int				end;	
-	pthread_mutex_t	*mutex;
+	pthread_mutex_t	mutex;
 	t_philo			*philos;
 }					t_data;
 
@@ -66,7 +67,7 @@ int	ft_usleep(size_t milliseconds);
 size_t	get_current_time(void);
 int ft_monitoring(void *data);
 void ft_set_dead(t_data *data, int value);
-
+void get(pthread_mutex_t *locker, int *var, int value);
 // utils
 long	ft_atoi(const char *nptr);
 int		ft_strlen(char *str);

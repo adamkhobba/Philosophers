@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:12:17 by adam              #+#    #+#             */
-/*   Updated: 2024/07/20 19:00:45 by adam             ###   ########.fr       */
+/*   Updated: 2024/07/21 18:35:05 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int ft_creation_of_philo(t_data *data)
     i = 0;
     while (i < data->num_of_philos)
     {
+        if (pthread_mutex_init(&data->philos[i].locker, NULL))
+        {
+            ft_free_mutex(data, i);
+            return (1);
+        }
         if (pthread_mutex_init(&data->philos[i].forks, NULL))
         {
             ft_free_mutex(data, i);
@@ -32,16 +37,15 @@ int ft_creation_of_philo(t_data *data)
     {
         data->philos[i].start_time = get_current_time();
         data->philos[i].data = data;
-        if(pthread_create(&data->philos[i].thread, NULL,
-            &ft_philos_routine, &data->philos[i]))
-            {
-                ft_free_mutex(data, i);
-                return (1);
-            }
         data->philos[i].index_of_philo = i + 1;
+        if(pthread_create(&data->philos[i].thread, NULL,
+            &ft_philos_routine, &data->philos[i]) == -1)
+        {
+            ft_free_mutex(data, i);
+            return (1);
+        }
         i++;
     }
-    ft_set_dead(data, 1);
     return (0);
 }
 
@@ -59,32 +63,44 @@ void ft_init_struct(char **av, int ac, t_data *data)
 int main (int ac, char **av)
 {
     t_data      data;
-    t_data      *pdata;
+    t_data      pdata;
     int         i;
 
     if (!ft_parsing(av, ac))
         return (1);    
-    pdata = &data;
-    ft_init_struct(av, ac, pdata);
-    pdata->dead_flag = 1;
-    pdata->num_of_philos = ft_atoi(av[1]);
-    pdata->philos = (t_philo *)malloc(sizeof(t_philo) * (pdata->num_of_philos));
-    if (!pdata->philos)
+    ft_init_struct(av, ac, &pdata);
+    pdata.dead_flag = 1;
+    pdata.num_of_philos = ft_atoi(av[1]);
+    pdata.philos = (t_philo *)malloc(sizeof(t_philo) * (pdata.num_of_philos));
+    pthread_mutex_init(&pdata.mutex, NULL);
+    if (!pdata.philos)
         return (1);
-    ft_creation_of_philo(pdata);
-    if (ft_monitoring(pdata))
-        return (1);
-    i = 0;
-    while (i < pdata->num_of_philos)
+    ft_creation_of_philo(&pdata);
+    if (ft_monitoring(&pdata))
     {
-        if (pthread_join(pdata->philos[i].thread, NULL))
+        i = 0;
+        while (i < pdata.num_of_philos)
         {
-            ft_free_mutex(pdata, i);
+            if (pthread_join(pdata.philos[i].thread, NULL)  == -1)
+            {
+                ft_free_mutex(&pdata, i);
+                return (1);
+            }
+            i++;
+        }
+        return (1);
+    }
+    i = 0;
+    while (i < pdata.num_of_philos)
+    {
+        if (pthread_join(pdata.philos[i].thread, NULL)  == -1)
+        {
+            ft_free_mutex(&pdata, i);
             return (1);
         }
         i++;
     }
-    ft_free_mutex(pdata, data.num_of_philos - 1);
-    ft_free_data(pdata);
+    ft_free_mutex(&pdata, data.num_of_philos - 1);
+    ft_free_data(&pdata);
     return (0);
 }

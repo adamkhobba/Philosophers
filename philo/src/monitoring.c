@@ -30,8 +30,11 @@ void ft_set_dead(t_data *data, int value)
     int i;
 
     i = 0;
+    // if (!data)
+    //     return ;
     while (i < data->num_of_philos)
     {
+        // get(&data->mutex, &data->philos[i].dead, value);
         data->philos[i].dead = value;
         i++;
     }

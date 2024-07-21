@@ -3,20 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adam <adam@student.42.fr>                  +#+  +:+       +#+         #
+#    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 20:08:55 by adam              #+#    #+#              #
-#    Updated: 2024/07/20 20:31:28 by adam             ###   ########.fr        #
+#    Updated: 2024/07/21 18:53:44 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -fsanitize=thread -g3 #-Wall -Wextra -Werror
 
 SRC = main.c src/parsing.c src/monitoring.c src/philo_routine.c\
-		src/ft_usleep.c src/free.c\
+		src/ft_usleep.c src/free.c src/ft_lockvar.c\
 		utils/ft_atoi.c utils/ft_strlen.c\
 
 OBJ = ${SRC:.c=.o}
@@ -26,7 +26,7 @@ INC = -I./include
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJ} -pthread  -fsanitize=thread -g3
+	${CC} ${CFLAGS} -o ${NAME} ${OBJ} -pthread  
 
 %.o: %.c
 	${CC} ${CFLAGS} $(INC) -c $< -o $@
