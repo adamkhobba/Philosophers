@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils_monitor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 16:06:56 by adam              #+#    #+#             */
-/*   Updated: 2024/07/22 16:13:04 by akhobba          ###   ########.fr       */
+/*   Created: 2024/07/22 15:35:18 by akhobba           #+#    #+#             */
+/*   Updated: 2024/07/22 16:13:33 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long	ft_atoi(const char *nptr)
+void	ft_set_dead(t_data *data, int value)
 {
-	long	i;
-	long	n;
-	long	f;
+	int	i;
 
 	i = 0;
-	n = 0;
-	f = 1;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while (i < data->num_of_philos)
 	{
-		if (nptr[i] == '-')
-			f = f * -1;
+		set(&data->philos[i].locker, &data->philos[i].dead, value);
 		i++;
 	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		n = n * 10 + (((char *)nptr)[i++] - 48);
-	}
-	return (n * f);
 }

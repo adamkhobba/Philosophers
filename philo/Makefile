@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 20:08:55 by adam              #+#    #+#              #
-#    Updated: 2024/07/21 18:53:44 by akhobba          ###   ########.fr        #
+#    Updated: 2024/07/22 21:30:17 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS = -fsanitize=thread -g3 #-Wall -Wextra -Werror
 
 SRC = main.c src/parsing.c src/monitoring.c src/philo_routine.c\
 		src/ft_usleep.c src/free.c src/ft_lockvar.c\
-		utils/ft_atoi.c utils/ft_strlen.c\
+		utils/ft_atoi.c utils/ft_strlen.c utils/utils_monitor.c utils/utils_parsing.c\
 
 OBJ = ${SRC:.c=.o}
 

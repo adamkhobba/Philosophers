@@ -3,70 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 16:32:48 by adam              #+#    #+#             */
-/*   Updated: 2024/07/16 11:52:08by adam             ###   ########.fr       */
+/*   Created: 2024/07/22 16:15:03 by akhobba           #+#    #+#             */
+/*   Updated: 2024/07/22 21:24:55 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int ft_stop(t_data *data)
+int	ft_stop(t_data *data)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < data->num_of_philos)
-    {
-        if (!data->philos[i].last_meal)
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (i < data->num_of_philos)
+	{
+		if (!get(&data->philos[i].locker, &data->philos[i].last_meal))
+			return (0);
+		i++;
+	}
+	return (1);
 }
-void ft_set_dead(t_data *data, int value)
-{
-    int i;
 
-    i = 0;
-    // if (!data)
-    //     return ;
-    while (i < data->num_of_philos)
-    {
-        // get(&data->mutex, &data->philos[i].dead, value);
-        data->philos[i].dead = value;
-        i++;
-    }
+int	check_eat_time(t_data *data)
+{
+	int	i;
+	int	num_eated;
+
+	i = 0;
+	num_eated = 0;
+	while (i < data->num_of_philos)
+	{
+		if (get(&data->philos[i].locker,
+				&data->philos[i].full) >= data->num_times_to_eat)
+			num_eated++;
+		i++;
+	}
+	return (num_eated);
 }
-// my program shouldn't print after the philo died
 
-int ft_monitoring(void *arg)
+int	ft_check_dead(t_data *data)
 {
-    int i;
-    t_data *data;
+	int	i;
 
-    data = (t_data *)arg;
-    while (!ft_stop(data))
-        ft_usleep(100);
-    while (data->dead_flag)
-    {
-        i = 0;
-        while(i < data->num_of_philos)
-        {
-            if (get_current_time() - data->philos[i].last_meal >= data->time_to_die)
-            {
-                data->dead_flag = 0;
-                ft_set_dead(data, 0); 
-                printf("%s %zu %d died %s\n", RED,
-                    (get_current_time() - data->philos[i].start_time),
-                    data->philos[i].index_of_philo, NC);
-                
-                return (1);
-            }
-            i++;
-        }
-        usleep(500);
-    }
-    return (0);
+	i = -1;
+	while (++i < data->num_of_philos)
+	{
+		if (get_current_time() - get(&data->philos[i].locker,
+				&data->philos[i].last_meal) >= data->time_to_die)
+		{
+			data->dead_flag = 0;
+			ft_set_dead(data, 0);
+			printf("%s %zu %d died %s\n", RED, (get_current_time()
+					- data->philos[i].start_time),
+				data->philos[i].index_of_philo, NC);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int	ft_monitoring(void *arg)
+{
+	int		i;
+	t_data	*data;
+
+	data = (t_data *)arg;
+	while (!ft_stop(data))
+		ft_usleep(100);
+	while (data->dead_flag)
+	{
+		if (ft_check_dead(data))
+			return (1);
+		if (data->num_times_to_eat != -1
+			&& check_eat_time(data) == data->num_of_philos)
+		{
+			data->dead_flag = 0;
+			ft_set_dead(data, 0);
+			return (1);
+		}
+		usleep(500);
+	}
+	return (0);
 }

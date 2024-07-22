@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utisl_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 16:06:56 by adam              #+#    #+#             */
-/*   Updated: 2024/07/22 16:13:04 by akhobba          ###   ########.fr       */
+/*   Created: 2024/07/22 21:26:42 by akhobba           #+#    #+#             */
+/*   Updated: 2024/07/22 21:29:04 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long	ft_atoi(const char *nptr)
+int	ft_args_nbr(int c)
 {
-	long	i;
-	long	n;
-	long	f;
+	if (c == 5 || c == 6)
+		return (1);
+	return (0);
+}
 
-	i = 0;
-	n = 0;
-	f = 1;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			f = f * -1;
-		i++;
-	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		n = n * 10 + (((char *)nptr)[i++] - 48);
-	}
-	return (n * f);
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }
