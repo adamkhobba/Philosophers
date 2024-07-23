@@ -6,14 +6,14 @@
 #    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 20:08:55 by adam              #+#    #+#              #
-#    Updated: 2024/07/22 21:30:17 by akhobba          ###   ########.fr        #
+#    Updated: 2024/07/23 16:38:08 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
 
-CFLAGS = -fsanitize=thread -g3 #-Wall -Wextra -Werror
+CFLAGS = -fsanitize=thread -g3 -Wall -Wextra -Werror
 
 SRC = main.c src/parsing.c src/monitoring.c src/philo_routine.c\
 		src/ft_usleep.c src/free.c src/ft_lockvar.c\

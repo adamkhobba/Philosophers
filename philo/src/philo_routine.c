@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:26:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/22 21:26:05 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/23 16:50:21 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ void	ft_eat_v2(t_philo *data)
 	pthread_mutex_unlock(&data->forks);
 }
 
+void	ft_swap(pthread_mutex_t *a, pthread_mutex_t *b)
+{
+	pthread_mutex_t	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 void	ft_eat(t_philo *data)
 {
 	pthread_mutex_lock(data->forks_l);
@@ -42,8 +51,8 @@ void	ft_eat(t_philo *data)
 			- data->start_time, data->index_of_philo, NC);
 	set(&data->locker, &data->full, data->full + 1);
 	ft_usleep(data->data->time_to_eat);
-	pthread_mutex_unlock(&data->forks);
 	pthread_mutex_unlock(data->forks_l);
+	pthread_mutex_unlock(&data->forks);
 }
 
 void	*ft_philos_routine(void *args)
@@ -55,7 +64,7 @@ void	*ft_philos_routine(void *args)
 	if (data->index_of_philo % 2 == 0)
 		ft_usleep(60);
 	set(&data->locker, &data->last_meal, get_current_time());
-	while (get(&data->locker, &data->data->dead_flag))
+	while (get(&data->locker, &data->dead))
 	{
 		if (data->index_of_philo % 2 == 0)
 			ft_eat(data);
@@ -66,6 +75,7 @@ void	*ft_philos_routine(void *args)
 			printf("%s %zu %d is sleeping\n%s", YELLOW, get_current_time()
 				- data->start_time, data->index_of_philo, NC);
 			ft_usleep(data->data->time_to_sleep);
+			usleep(499);
 		}
 		if (get(&data->locker, &data->dead))
 			printf("%s %zu %d is thinking%s\n", GREEN, (get_current_time()

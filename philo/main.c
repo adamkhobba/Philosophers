@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/22 21:43:40 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/23 15:19:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	ft_join(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	pdata;
-	int		i;
 
 	if (!ft_parsing(av, ac))
 		return (1);

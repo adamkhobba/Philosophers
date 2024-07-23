@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:15:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/22 21:24:55 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/23 15:20:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_eat_time(t_data *data)
 	while (i < data->num_of_philos)
 	{
 		if (get(&data->philos[i].locker,
-				&data->philos[i].full) >= data->num_times_to_eat)
+				&data->philos[i].full) >= (size_t)data->num_times_to_eat)
 			num_eated++;
 		i++;
 	}
@@ -66,7 +66,6 @@ int	ft_check_dead(t_data *data)
 
 int	ft_monitoring(void *arg)
 {
-	int		i;
 	t_data	*data;
 
 	data = (t_data *)arg;
