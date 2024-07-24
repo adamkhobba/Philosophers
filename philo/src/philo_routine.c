@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:26:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/23 16:50:21 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/24 08:01:30 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ void	ft_eat_v2(t_philo *data)
 	ft_usleep(data->data->time_to_eat);
 	pthread_mutex_unlock(data->forks_l);
 	pthread_mutex_unlock(&data->forks);
-}
-
-void	ft_swap(pthread_mutex_t *a, pthread_mutex_t *b)
-{
-	pthread_mutex_t	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
 }
 
 void	ft_eat(t_philo *data)
@@ -64,8 +55,10 @@ void	*ft_philos_routine(void *args)
 	if (data->index_of_philo % 2 == 0)
 		ft_usleep(60);
 	set(&data->locker, &data->last_meal, get_current_time());
-	while (get(&data->locker, &data->dead))
+	while (get(&data->locker, &data->data->dead_flag))
 	{
+		// if (!get(&data->locker, &data->dead))
+		// 	break ;
 		if (data->index_of_philo % 2 == 0)
 			ft_eat(data);
 		else

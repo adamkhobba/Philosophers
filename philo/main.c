@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/23 15:19:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:09:44 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	ft_join(t_data *data)
 	int	i;
 
 	i = 0;
+	if (data->num_of_philos == 1)
+		return (1);
 	while (i < data->num_of_philos)
 	{
 		if (pthread_join(data->philos[i].thread, NULL) == -1)
