@@ -6,11 +6,11 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:44 by adam              #+#    #+#             */
-/*   Updated: 2024/07/27 12:30:11 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/27 12:31:00 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 int	ft_isnull(char **input, char c)
 {

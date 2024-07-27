@@ -1,0 +1,38 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/07/27 10:23:45 by akhobba           #+#    #+#              #
+#    Updated: 2024/07/27 10:24:39 by akhobba          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC = cc
+
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g3 
+
+SRC = main.c \
+
+OBJ = ${SRC:.c=.o}
+
+NAME = Philo_bonus
+
+INC = -I./include
+
+all: ${NAME}
+
+${NAME}: ${OBJ}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJ}
+
+%.o: %.c
+	${CC} ${CFLAGS} $(INC) -c $< -o $@
+clean:
+	rm -f ${OBJ}
+
+fclean: clean
+	rm -f ${NAME}
+
+re: fclean all
