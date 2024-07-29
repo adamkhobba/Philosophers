@@ -41,6 +41,7 @@ typedef struct s_philo
 	size_t			start_time;
 	size_t			full;
 	size_t			dead;
+	int				status;
 	int				index_of_philo;
 	struct s_data	*data;
 }					t_philo;
@@ -54,7 +55,6 @@ typedef struct s_data
 	size_t			dead_flag;
 	int				num_of_philos;
 	int				nbr_limits_meals;
-	int			*pid;
 	sem_t			*sem;
 	t_philo			*philos;
 }					t_data;
@@ -64,6 +64,7 @@ int					ft_parsing(char **input, int c);
 // void				ft_free_data(t_data *data);
 void    ft_philos_routine(t_philo *data);
 int					ft_usleep(size_t milliseconds);
+int					ft_kill_all(int *id);
 size_t				get_current_time(void);
 void				*ft_monitoring(void *args);
 // void				ft_set_dead(t_data *data, int value);
