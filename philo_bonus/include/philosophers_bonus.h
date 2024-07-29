@@ -18,6 +18,12 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <pthread.h>
+# include <string.h>
+# include <semaphore.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <signal.h>
 
 # define NC "\e[0m"
 # define YELLOW "\e[33m"
@@ -29,6 +35,7 @@
 
 typedef struct s_philo
 {
+	pthread_t 		thread;
 	size_t			last_meal;
 	size_t			current_meal;
 	size_t			start_time;
@@ -47,18 +54,18 @@ typedef struct s_data
 	size_t			dead_flag;
 	int				num_of_philos;
 	int				nbr_limits_meals;
-	int				start;
-	int				end;
+	int			*pid;
+	sem_t			*sem;
 	t_philo			*philos;
 }					t_data;
 
 // src
 int					ft_parsing(char **input, int c);
 // void				ft_free_data(t_data *data);
-// void				*ft_philos_routine(void *args);
-// int					ft_usleep(size_t milliseconds);
-// size_t				get_current_time(void);
-// int					ft_monitoring(void *data);
+void    ft_philos_routine(t_philo *data);
+int					ft_usleep(size_t milliseconds);
+size_t				get_current_time(void);
+void				*ft_monitoring(void *args);
 // void				ft_set_dead(t_data *data, int value);
 
 // utils

@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_monitor.c                                    :+:      :+:    :+:   */
+/*   ft_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 15:35:18 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/27 10:27:37 by akhobba          ###   ########.fr       */
+/*   Created: 2024/07/28 10:22:03 by akhobba           #+#    #+#             */
+/*   Updated: 2024/07/28 10:22:13 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-void	ft_set_dead(t_data *data, int value)
+size_t	get_current_time(void)
 {
-	int	i;
+	struct timeval	time;
 
-	i = 0;
-	while (i < data->num_of_philos)
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, "gettimeofday() error\n", 22);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+int	ft_usleep(size_t milliseconds)
+{
+	size_t	start;
+
+	start = get_current_time();
+	while ((get_current_time() - start) < milliseconds)
 	{
-		set(&data->philos[i].locker, &data->philos[i].dead, value);
-		i++;
+		if (usleep(500))
+			return (1);
 	}
+	return (0);
 }

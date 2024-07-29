@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 10:23:45 by akhobba           #+#    #+#              #
-#    Updated: 2024/07/27 10:24:39 by akhobba          ###   ########.fr        #
+#    Updated: 2024/07/28 19:05:35 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g3 
 
-SRC = main.c \
+SRC = main.c  src/ft_usleep.c src/parsing.c src/monitore.c\
+	src/philo_routine.c\
+	utils/ft_atoi.c utils/ft_strlen.c \
+	utils/utils_parsing.c\
 
 OBJ = ${SRC:.c=.o}
 
@@ -25,7 +28,7 @@ INC = -I./include
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJ}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJ} -pthread
 
 %.o: %.c
 	${CC} ${CFLAGS} $(INC) -c $< -o $@
