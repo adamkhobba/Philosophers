@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/27 12:16:37 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/27 12:33:20 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int	main(int ac, char **av)
 	ft_init_struct(av, ac, &pdata);
 	pdata.num_of_philos = ft_atoi(av[1]);
 	pdata.philos = (t_philo *)malloc(sizeof(t_philo) * (pdata.num_of_philos));
-	memset(pdata.philos, 0, sizeof(t_philo) * pdata.num_of_philos);
 	if (!pdata.philos)
 		return (1);
+	memset(pdata.philos, 0, sizeof(t_philo) * pdata.num_of_philos);
 	ft_init_mutex(&pdata);
 	ft_creation_of_philo(&pdata);
 	if (ft_monitoring(&pdata))
