@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 10:24:43 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/30 20:02:02 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/30 22:03:48 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int ac, char **av)
 	memset(id, 0, sizeof(int) * pdata.num_of_philos);
 	sem_unlink("forks"); 
 	sem_unlink("sem_print");
+	sem_unlink("sem_data");
 	pdata.sem_print = sem_open("sem_print", O_CREAT, 0644, 1);
 	if (pdata.sem_print == SEM_FAILED)
 		return (1); // free before return 
@@ -90,6 +91,8 @@ int	main(int ac, char **av)
 	if (id[i] == 0)
 	{
 		pdata.sem_data = sem_open("sem_data", O_CREAT, 0644, 1);
+		if (pdata.sem_data == SEM_FAILED)
+			return (1); // free before return
 		pdata.philos[i].index_of_philo = i + 1;
 		pdata.philos[i].data = &pdata;
 		pdata.philos[i].last_meal = 0;

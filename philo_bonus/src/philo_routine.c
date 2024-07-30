@@ -51,6 +51,7 @@ void    ft_philos_routine(t_philo *philo)
 	while (get(philo->data, &philo->data->dead_flag))
 	{
 		ft_eat(philo);
+		// if (!philo->data->dead_flag)
 		if (!get(philo->data, &philo->data->dead_flag))
 			break ;
 		sem_wait(philo->data->sem_print);

@@ -6,12 +6,11 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:39:04 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/30 20:15:25 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/30 21:34:22 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philosophers_bonus.h"
-
 
 void set(t_data *data, size_t *var, size_t value)
 {
@@ -23,6 +22,7 @@ void set(t_data *data, size_t *var, size_t value)
 size_t get(t_data *data, size_t *var)
 {
     size_t tmp;
+
     sem_wait(data->sem_data);
     tmp = *var;
     sem_post(data->sem_data);
