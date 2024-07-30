@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 10:24:43 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/30 17:44:09 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/30 20:02:02 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	main(int ac, char **av)
 	}
 	if (id[i] == 0)
 	{
+		pdata.sem_data = sem_open("sem_data", O_CREAT, 0644, 1);
 		pdata.philos[i].index_of_philo = i + 1;
 		pdata.philos[i].data = &pdata;
 		pdata.philos[i].last_meal = 0;

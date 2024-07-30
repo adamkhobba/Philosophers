@@ -55,8 +55,9 @@ typedef struct s_data
 	int				num_of_philos;
 	int				nbr_limits_meals;
 	sem_t			*forks;
-	int				*id;
 	sem_t			*sem_print;
+	sem_t			*sem_data;
+	int				*id;
 	t_philo			*philos;
 	size_t			start_time;
 }					t_data;

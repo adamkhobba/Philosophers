@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:14:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/30 19:59:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/30 20:02:50 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	ft_check_dead(t_philo *philo)
 {
         if ((get_current_time() - philo->last_meal) >= philo->data->time_to_die)
         {
-			printf("time of die =%zu\n", (get_current_time() - philo->last_meal));
-			printf("time to die =%zu\n", philo->data->time_to_die);
 			sem_wait(philo->data->sem_print);
 			printf("%s %zu %d died %s\n", RED, get_current_time() -
 				philo->data->start_time, philo->index_of_philo, NC);
