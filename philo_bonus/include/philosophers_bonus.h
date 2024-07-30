@@ -38,7 +38,6 @@ typedef struct s_philo
 	pthread_t 		thread;
 	size_t			last_meal;
 	size_t			current_meal;
-	size_t			start_time;
 	size_t			full;
 	size_t			dead;
 	int				status;
@@ -55,14 +54,18 @@ typedef struct s_data
 	size_t			dead_flag;
 	int				num_of_philos;
 	int				nbr_limits_meals;
-	sem_t			*sem;
+	sem_t			*forks;
+	int				*id;
+	sem_t			*sem_print;
 	t_philo			*philos;
+	size_t			start_time;
 }					t_data;
 
 // src
 int					ft_parsing(char **input, int c);
-// void				ft_free_data(t_data *data);
-void    ft_philos_routine(t_philo *data);
+int					ft_kill(int *id, t_data *data);
+void				ft_free(t_data *data);
+void				ft_philos_routine(t_philo *data);
 int					ft_usleep(size_t milliseconds);
 int					ft_kill_all(int *id);
 size_t				get_current_time(void);

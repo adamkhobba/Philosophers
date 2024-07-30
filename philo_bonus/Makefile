@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 10:23:45 by akhobba           #+#    #+#              #
-#    Updated: 2024/07/28 19:05:35 by akhobba          ###   ########.fr        #
+#    Updated: 2024/07/30 17:38:16 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g3 
 
 SRC = main.c  src/ft_usleep.c src/parsing.c src/monitore.c\
-	src/philo_routine.c\
+	src/philo_routine.c src/utils.c\
 	utils/ft_atoi.c utils/ft_strlen.c \
 	utils/utils_parsing.c\
 

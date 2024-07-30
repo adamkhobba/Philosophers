@@ -6,40 +6,61 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:58:17 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/29 13:04:32 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/30 17:32:38 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-void    ft_eat(t_philo *data)
+void    ft_eat(t_philo *philo)
 {
-    sem_wait(data->data->sem);
-    sem_wait(data->data->sem);
-    data->last_meal = get_current_time();
+	if (!philo->data->dead_flag)
+		return ;
+    sem_wait(philo->data->forks);
+	sem_wait(philo->data->sem_print);
 	printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
-			- data->start_time, data->index_of_philo, NC);
+			- philo->data->start_time, philo->index_of_philo, NC);
+	sem_post(philo->data->sem_print);
+    sem_wait(philo->data->forks);
+	if (!philo->data->dead_flag)
+		return ;
+	sem_wait(philo->data->sem_print);
+	printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
+			- philo->data->start_time, philo->index_of_philo, NC);
 	printf("%s %zu %d is eating\n%s", CYAN, get_current_time()
-			- data->start_time, data->index_of_philo, NC);
-			ft_usleep(data->data->time_to_eat); 
-    sem_post(data->data->sem);
-    sem_post(data->data->sem);
+			- philo->data->start_time, philo->index_of_philo, NC);
+	sem_post(philo->data->sem_print);
+    philo->last_meal = get_current_time();
+	ft_usleep(philo->data->time_to_eat);
+    sem_post(philo->data->forks);
+    sem_post(philo->data->forks);
 }
 
-void    ft_philos_routine(t_philo *data)
+void    ft_philos_routine(t_philo *philo)
 {
-	// ft_set_dead(data->data, 1);
-    data->last_meal = get_current_time();
-	while (data->data->dead_flag)
+	int	status;
+
+	status = -1;
+    philo->last_meal = get_current_time();
+	while (philo->data->dead_flag)
 	{
-            // eat
-			ft_eat(data);
-            printf("%s %zu %d is sleeping\n%s", YELLOW, get_current_time()
-				- data->start_time, data->index_of_philo, NC);
-            // sleep
-			ft_usleep(data->data->time_to_sleep); 
-            // think
+		ft_eat(philo);
+		if (!philo->data->dead_flag)
+			break ;
+		sem_wait(philo->data->sem_print);
+			printf("%s %zu %d is sleeping\n%s", YELLOW, get_current_time()
+				- philo->data->start_time, philo->index_of_philo, NC);
+		sem_post(philo->data->sem_print);
+		ft_usleep(philo->data->time_to_sleep); 
+		if (!philo->data->dead_flag)
+			break ;
+		sem_wait(philo->data->sem_print);
 			printf("%s %zu %d is thinking%s\n", GREEN, (get_current_time()
-					- data->start_time), data->index_of_philo, NC);
+				- philo->data->start_time), philo->index_of_philo, NC);
+		sem_post(philo->data->sem_print);
 	}
+	pthread_join(philo->thread, NULL);
+	status = philo->status;
+	ft_free(philo->data);
+	exit(status);
 }
