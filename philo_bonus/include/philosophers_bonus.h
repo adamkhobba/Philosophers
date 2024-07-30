@@ -67,6 +67,8 @@ int					ft_parsing(char **input, int c);
 int					ft_kill(int *id, t_data *data);
 void				ft_free(t_data *data);
 void				ft_philos_routine(t_philo *data);
+size_t get(t_data *data, size_t *var);
+void set(t_data *data, size_t *var, size_t value);
 int					ft_usleep(size_t milliseconds);
 int					ft_kill_all(int *id);
 size_t				get_current_time(void);
