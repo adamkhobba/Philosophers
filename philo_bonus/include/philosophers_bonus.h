@@ -76,8 +76,9 @@ void				*ft_monitoring(void *args);
 // void				ft_set_dead(t_data *data, int value);
 
 // utils
+int					ft_init_sem(t_data data, sem_t **sem_print, sem_t **forks);
+void				ft_wait(int *id, t_data *pdata);
 int					ft_init_pointers(t_philo *philo, int *id, t_data *data);
-int					ft_init_sem(sem_t **sem, char *name, int value);
 long				ft_atoi(const char *nptr);
 void				ft_unlink(void);
 int					ft_strlen(char *str);

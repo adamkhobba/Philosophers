@@ -14,6 +14,7 @@
 
 void	ft_init_struct(char **av, int ac, t_data *data)
 {
+	ft_unlink();
 	data->start_time = get_current_time();
 	data->num_of_philos = ft_atoi(av[1]);
 	data->dead_flag = 1;
@@ -40,39 +41,31 @@ int	ft_chlid_work(t_data *data, int i)
 	ft_philos_routine(&data->philos[i]);
 	return (0);
 }
-
+int ft_init_data(t_data pdata, t_philo **philos, int **id)
+{
+	*id = NULL;
+	*philos = (t_philo *)malloc(sizeof(t_philo) * (pdata.num_of_philos));
+	if (!*philos)
+		return (1);
+	*id = (int *)malloc(sizeof(int) * pdata.num_of_philos);
+	if (!*id)
+		return (1);
+	memset(pdata.philos, 0, sizeof(t_philo) * pdata.num_of_philos);
+	memset(*id, 0, sizeof(int) * pdata.num_of_philos);
+	return (0);
+}
 int	main(int ac, char **av)
 {
 	t_data	pdata;
 	int i;
 	int *id;
-	int	status;
 
 	if (!ft_parsing(av, ac))
 		return (1);
-	// init data 
-	pdata = (t_data){0};
-	id = NULL;
 	ft_init_struct(av, ac, &pdata);
-	pdata.philos = (t_philo *)malloc(sizeof(t_philo) * (pdata.num_of_philos));
-	if (!pdata.philos)
-		return (1);
-	id = (int *)malloc(sizeof(int) * pdata.num_of_philos);
-	if (!id)
-		return (ft_free(&pdata),1);
-	memset(pdata.philos, 0, sizeof(t_philo) * pdata.num_of_philos);
-	memset(id, 0, sizeof(int) * pdata.num_of_philos);
+	ft_init_data(pdata, &pdata.philos, &id);
 	pdata.id = id;
-	ft_unlink();
-	pdata.sem_print = sem_open("sem_print", O_CREAT, 0644, 1);
-	if (pdata.sem_print == SEM_FAILED)
-		return (1);
-	if (pdata.num_times_to_eat % 2)
-		pdata.forks = sem_open("forks", O_CREAT, 0644, pdata.num_of_philos + 1);
-	else
-		pdata.forks = sem_open("forks", O_CREAT, 0644, pdata.num_of_philos);
-	if (pdata.forks == SEM_FAILED)
-		return (1);
+	ft_init_sem(pdata,&pdata.sem_print, &pdata.forks);
 	i = 0; 
 	id[i] = fork();
 	while (i < pdata.num_of_philos - 1)
@@ -88,11 +81,6 @@ int	main(int ac, char **av)
 		 	return (1);
 		return (0);
 	}
-		while(waitpid(-1, &status, 0) != -1)
-		{
- 			if (WEXITSTATUS(status) == 1)
-				ft_kill(id, &pdata);
-		}
-		ft_free(&pdata);
-	return (0);
+	ft_wait(id, &pdata);
+	return (ft_free(&pdata),0);
 }
