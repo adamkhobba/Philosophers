@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:15:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 11:55:29 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/31 12:51:53 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_check_dead(t_data *data)
 	while (++i < data->num_of_philos)
 	{
 		if (get_current_time() - get(&data->philos[i].locker,
-				&data->philos[i].last_meal) >= data->time_to_die)
+				&data->philos[i].last_meal) > data->time_to_die)
 		{
 			data->dead_flag = 0;
 			ft_set_dead(data, 0);

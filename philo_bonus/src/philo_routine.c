@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:52:00 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 11:53:34 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/31 14:30:06 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_philos_routine(t_philo *philo)
 {
 	int	status;
 
-	status = -1;
 	set(philo->data, &philo->last_meal, get_current_time());
 	while (get(philo->data, &philo->data->dead_flag))
 	{
@@ -59,6 +58,7 @@ void	ft_philos_routine(t_philo *philo)
 		printf("%s %zu %d is thinking%s\n", GREEN, (get_current_time()
 				- philo->data->start_time), philo->index_of_philo, NC);
 		sem_post(philo->data->sem_print);
+		usleep(500);
 	}
 	pthread_join(philo->thread, NULL);
 	status = philo->status;

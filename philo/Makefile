@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 20:08:55 by adam              #+#    #+#              #
-#    Updated: 2024/07/23 17:20:27 by akhobba          ###   ########.fr        #
+#    Updated: 2024/07/31 12:49:54 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = main.c src/parsing.c src/monitoring.c src/philo_routine.c\
 
 OBJ = ${SRC:.c=.o}
 
-NAME = Philo
+NAME = philo
 INC = -I./include
 all: ${NAME}
 

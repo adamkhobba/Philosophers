@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:34:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 11:51:11 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/31 14:07:33 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ int	ft_init_sem(t_data data, sem_t **sem_print, sem_t **forks)
 	*sem_print = sem_open("sem_print", O_CREAT, 0644, 1);
 	if (*sem_print == SEM_FAILED)
 		return (1);
-	if (data.num_times_to_eat % 2)
-		*forks = sem_open("forks", O_CREAT, 0644, data.num_of_philos + 1);
-	else
-		*forks = sem_open("forks", O_CREAT, 0644, data.num_of_philos);
+	*forks = sem_open("forks", O_CREAT, 0644, data.num_of_philos);
 	if (*forks == SEM_FAILED)
 		return (1);
 	return (0);

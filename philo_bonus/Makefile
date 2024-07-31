@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 10:23:45 by akhobba           #+#    #+#              #
-#    Updated: 2024/07/31 09:30:32 by akhobba          ###   ########.fr        #
+#    Updated: 2024/07/31 12:53:24 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = main.c  src/ft_usleep.c src/parsing.c src/monitore.c\
 
 OBJ = ${SRC:.c=.o}
 
-NAME = Philo_bonus
+NAME = philo_bonus
 
 INC = -I./include
 
