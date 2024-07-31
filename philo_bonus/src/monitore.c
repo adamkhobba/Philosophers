@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:14:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/30 22:04:40 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/31 10:29:01 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void    *ft_monitoring(void *args)
 
 	philo = (t_philo *)args;
 	philo->status = 0;
+	while (philo->last_meal == 0)
+		usleep(600);
 	// while (philo->data->dead_flag)
 	while (get(philo->data, &philo->data->dead_flag))
 	{
