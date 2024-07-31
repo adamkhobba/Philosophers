@@ -35,6 +35,7 @@ int	ft_chlid_work(t_data *data, int i)
 	data->philos[i].index_of_philo = i + 1;
 	data->philos[i].data = data;
 	data->philos[i].last_meal = 0;
+	data->philos[i].full = 0;
 	if (pthread_create(&data->philos[i].thread, NULL, &ft_monitoring,
 			&data->philos[i]) == -1)
 		return (1);  
@@ -68,8 +69,8 @@ int	main(int ac, char **av)
 	pdata.id[i] = fork();
 	while (i < pdata.num_of_philos - 1)
 	{
-		if (pdata.id[i++] != 0)
-			pdata.id[i] = fork();
+		if (pdata.id[i] != 0)
+			pdata.id[++i] = fork();
 		else
 			break;
 	}

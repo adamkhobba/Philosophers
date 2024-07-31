@@ -24,6 +24,7 @@ void    ft_eat(t_philo *philo)
     sem_wait(philo->data->forks);
 	if (!get(philo->data, &philo->data->dead_flag))
 		return ;
+	set(philo->data, &philo->full, philo->full + 1); 
 	sem_wait(philo->data->sem_print);
 	printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
 			- philo->data->start_time, philo->index_of_philo, NC);

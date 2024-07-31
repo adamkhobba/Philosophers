@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:14:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 10:36:54 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/31 11:45:39 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ void    *ft_monitoring(void *args)
 			philo->status = 1;
             return (NULL);
 		}
-		// if (data->num_times_to_eat != -1
-		// 	&& check_eat_time(data) == data->num_of_philos)
-		// {
-			// data->dead_flag = 0;
-			// ft_set_dead(data, 0);
-			// return (data->num_of_philos);
-		// }
-		// ft_usleep(9);
+		if (philo->data->num_times_to_eat != -1
+			&& philo->full >= (size_t)philo->data->num_times_to_eat)
+		{
+			set(philo->data, &philo->data->dead_flag, 0);
+			philo->status = 0;
+			return (NULL);
+		}
 	}
 	return (NULL);
 }
