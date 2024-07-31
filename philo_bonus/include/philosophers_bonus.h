@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers_bonus_bonus.h                               :+:      :+:    :+:   */
+/*   philosophers_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 10:25:09 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/27 10:26:41 by akhobba          ###   ########.fr       */
+/*   Created: 2024/07/31 11:49:58 by akhobba           #+#    #+#             */
+/*   Updated: 2024/07/31 11:50:54 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef philosophers_bonus_BONUS_H
-# define philosophers_bonus_BONUS_H
+#ifndef PHILOSOPHERS_BONUS_H
+# define PHILOSOPHERS_BONUS_H
+# include <fcntl.h>
 # include <limits.h>
+# include <pthread.h>
+# include <semaphore.h>
+# include <signal.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <sys/time.h>
-# include <unistd.h>
-# include <pthread.h>
 # include <string.h>
-# include <semaphore.h>
+# include <sys/time.h>
 # include <sys/wait.h>
-# include <fcntl.h>
-# include <signal.h>
+# include <unistd.h>
 
 # define NC "\e[0m"
 # define YELLOW "\e[33m"
@@ -35,7 +35,7 @@
 
 typedef struct s_philo
 {
-	pthread_t 		thread;
+	pthread_t		thread;
 	size_t			last_meal;
 	size_t			current_meal;
 	size_t			full;

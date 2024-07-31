@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philosophers_bonus.h"
+#include "philosophers_bonus.h"
 
-void set(t_data *data, size_t *var, size_t value)
+void	set(t_data *data, size_t *var, size_t value)
 {
-    sem_wait(data->sem_data);
-    *var = value;
-    sem_post(data->sem_data);
+	sem_wait(data->sem_data);
+	*var = value;
+	sem_post(data->sem_data);
 }
 
-size_t get(t_data *data, size_t *var)
+size_t	get(t_data *data, size_t *var)
 {
-    size_t tmp;
+	size_t	tmp;
 
-    sem_wait(data->sem_data);
-    tmp = *var;
-    sem_post(data->sem_data);
-    return (tmp);
+	sem_wait(data->sem_data);
+	tmp = *var;
+	sem_post(data->sem_data);
+	return (tmp);
 }

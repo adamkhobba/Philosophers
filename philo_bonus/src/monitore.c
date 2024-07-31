@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:14:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 11:45:39 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/31 11:53:41 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int	ft_check_dead(t_philo *philo)
 {
-        if ((get_current_time() - get(philo->data, &philo->last_meal)) >= philo->data->time_to_die)
-        {
-			sem_wait(philo->data->sem_print);
-			printf("%s %zu %d died %s\n", RED, get_current_time() -
-				philo->data->start_time, philo->index_of_philo, NC);
-			return (1);
-        }
+	if ((get_current_time() - get(philo->data,
+				&philo->last_meal)) >= philo->data->time_to_die)
+	{
+		sem_wait(philo->data->sem_print);
+		printf("%s %zu %d died %s\n", RED, get_current_time()
+			- philo->data->start_time, philo->index_of_philo, NC);
+		return (1);
+	}
 	return (0);
 }
 
-void    *ft_monitoring(void *args)
+void	*ft_monitoring(void *args)
 {
-    t_philo	*philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)args;
 	philo->status = 0;
@@ -38,7 +39,7 @@ void    *ft_monitoring(void *args)
 		{
 			set(philo->data, &philo->data->dead_flag, 0);
 			philo->status = 1;
-            return (NULL);
+			return (NULL);
 		}
 		if (philo->data->num_times_to_eat != -1
 			&& philo->full >= (size_t)philo->data->num_times_to_eat)
