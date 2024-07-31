@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:26:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 11:56:05 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/31 14:35:18 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 void	ft_eat_v2(t_philo *data)
 {
 	pthread_mutex_lock(&data->forks);
+	if (get(&data->locker, &data->dead))
+		printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
+			- data->start_time, data->index_of_philo, NC);
 	pthread_mutex_lock(data->forks_l);
 	set(&data->locker, &data->last_meal, get_current_time());
 	if (get(&data->locker, &data->dead))
@@ -32,6 +35,9 @@ void	ft_eat_v2(t_philo *data)
 void	ft_eat(t_philo *data)
 {
 	pthread_mutex_lock(data->forks_l);
+	if (get(&data->locker, &data->dead))
+		printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
+			- data->start_time, data->index_of_philo, NC);
 	pthread_mutex_lock(&data->forks);
 	set(&data->locker, &data->last_meal, get_current_time());
 	if (get(&data->locker, &data->dead))
