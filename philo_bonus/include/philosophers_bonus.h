@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:49:58 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 11:50:54 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/31 15:21:24 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_data
 	size_t			dead_flag;
 	int				num_of_philos;
 	int				nbr_limits_meals;
+	int				status;
 	sem_t			*forks;
 	sem_t			*sem_print;
 	sem_t			*sem_data;
