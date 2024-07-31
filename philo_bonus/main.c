@@ -58,29 +58,27 @@ int	main(int ac, char **av)
 {
 	t_data	pdata;
 	int i;
-	int *id;
 
 	if (!ft_parsing(av, ac))
 		return (1);
 	ft_init_struct(av, ac, &pdata);
-	ft_init_data(pdata, &pdata.philos, &id);
-	pdata.id = id;
+	ft_init_data(pdata, &pdata.philos, &pdata.id);
 	ft_init_sem(pdata,&pdata.sem_print, &pdata.forks);
 	i = 0; 
-	id[i] = fork();
+	pdata.id[i] = fork();
 	while (i < pdata.num_of_philos - 1)
 	{
-		if (id[i++] != 0)
-			id[i] = fork();
+		if (pdata.id[i++] != 0)
+			pdata.id[i] = fork();
 		else
 			break;
 	}
-	if (id[i] == 0)
+	if (pdata.id[i] == 0)
 	{
 		 if (ft_chlid_work(&pdata, i))
 		 	return (1);
 		return (0);
 	}
-	ft_wait(id, &pdata);
+	ft_wait(pdata.id, &pdata);
 	return (ft_free(&pdata),0);
 }
