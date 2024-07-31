@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/27 12:33:20 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/07/31 11:54:42 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ int	main(int ac, char **av)
 	if (ft_join(&pdata))
 		return (0);
 	ft_free_mutex(&pdata, pdata.num_of_philos - 1);
-	// free(pdata.philos);
-	// ft_free_data(&pdata);
 	free(pdata.philos);
 	return (0);
 }
