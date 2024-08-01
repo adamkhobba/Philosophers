@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:49:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 14:09:54 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/01 16:50:15 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void	ft_init_struct(char **av, int ac, t_data *data)
 		data->num_times_to_eat = -1;
 }
 
-int	ft_chlid_work(t_data *data, int i)
+int	ft_child_work(t_data *data, int i)
 {
+	if (!i % 2)
+		usleep(500);
 	data->sem_data = sem_open("sem_data", O_CREAT, 0644, 1);
 	if (data->sem_data == SEM_FAILED)
 		return (1);
@@ -52,7 +54,6 @@ int	ft_init_data(t_data pdata, t_philo **philos, int **id)
 	*id = (int *)malloc(sizeof(int) * pdata.num_of_philos);
 	if (!*id)
 		return (1);
-	memset(pdata.philos, 0, sizeof(t_philo) * pdata.num_of_philos);
 	memset(*id, 0, sizeof(int) * pdata.num_of_philos);
 	return (0);
 }
@@ -78,7 +79,7 @@ int	main(int ac, char **av)
 	}
 	if (pdata.id[i] == 0)
 	{
-		if (ft_chlid_work(&pdata, i))
+		if (ft_child_work(&pdata, i))
 			return (1);
 		return (0);
 	}

@@ -6,13 +6,13 @@
 #    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 10:23:45 by akhobba           #+#    #+#              #
-#    Updated: 2024/07/31 12:53:24 by akhobba          ###   ########.fr        #
+#    Updated: 2024/08/01 10:41:49 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 SRC = main.c  src/ft_usleep.c src/parsing.c src/monitore.c\
 	src/philo_routine.c src/lock_var.c utils/utils.c\

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:52:00 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 15:21:53 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/01 16:50:31 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_eat(t_philo *philo)
 
 void	ft_philos_routine(t_philo *philo)
 {
+	int status;
+
 	set(philo->data, &philo->last_meal, get_current_time());
 	while (get(philo->data, &philo->data->dead_flag))
 	{
@@ -61,7 +63,7 @@ void	ft_philos_routine(t_philo *philo)
 		usleep(500);
 	}
 	pthread_join(philo->thread, NULL);
-	philo->data->status = philo->status;
+	status = philo->status;
 	ft_free(philo->data);
-	exit(philo->data->status);
+	exit(status);
 }

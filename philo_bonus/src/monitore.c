@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:14:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 14:44:46 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/01 16:45:53 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_check_dead(t_philo *philo)
 				&philo->last_meal)) > philo->data->time_to_die)
 	{
 		sem_wait(philo->data->sem_print);
+		set(philo->data, &philo->data->dead_flag, 0);
 		printf("%s %zu %d died %s\n", RED, get_current_time()
 			- philo->data->start_time, philo->index_of_philo, NC);
 		return (1);
@@ -31,13 +32,12 @@ void	*ft_monitoring(void *args)
 
 	philo = (t_philo *)args;
 	philo->status = 0;
-	while (philo->last_meal == 0)
+	while (get(philo->data, &philo->last_meal) == 0)
 		usleep(600);
 	while (get(philo->data, &philo->data->dead_flag))
 	{
 		if (ft_check_dead(philo))
 		{
-			set(philo->data, &philo->data->dead_flag, 0);
 			philo->status = 1;
 			return (NULL);
 		}
@@ -48,6 +48,7 @@ void	*ft_monitoring(void *args)
 			philo->status = 0;
 			return (NULL);
 		}
+		usleep(500);
 	}
 	return (NULL);
 }
