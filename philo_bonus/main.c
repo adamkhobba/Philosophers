@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:49:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/01 16:50:15 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/02 09:52:07 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_child_work(t_data *data, int i)
 	if (pthread_create(&data->philos[i].thread, NULL, &ft_monitoring,
 			&data->philos[i]) == -1)
 		return (1);
-	ft_philos_routine(&data->philos[i]);
+	ft_philos_routine(&data->philos[i], data);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:49:58 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 15:21:24 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/01 17:00:36 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_data
 int					ft_parsing(char **input, int c);
 int					ft_kill(int *id, t_data *data);
 void				ft_free(t_data *data);
-void				ft_philos_routine(t_philo *data);
+void				ft_philos_routine(t_philo *philo, t_data *data);
 size_t				get(t_data *data, size_t *var);
 void				set(t_data *data, size_t *var, size_t value);
 int					ft_usleep(size_t milliseconds);

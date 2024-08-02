@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:52:00 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/01 16:50:31 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/02 09:54:27 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	ft_eat(t_philo *philo)
 	printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
 		- philo->data->start_time, philo->index_of_philo, NC);
 	sem_post(philo->data->sem_print);
+	sem_wait(philo->data->forks);
+	set(philo->data, &philo->full, philo->full + 1);
 	if (!get(philo->data, &philo->data->dead_flag)
 		|| philo->data->num_of_philos == 1)
 		return ;
-	sem_wait(philo->data->forks);
-	set(philo->data, &philo->full, philo->full + 1);
 	sem_wait(philo->data->sem_print);
 	printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
 		- philo->data->start_time, philo->index_of_philo, NC);
@@ -38,10 +38,8 @@ void	ft_eat(t_philo *philo)
 	sem_post(philo->data->forks);
 }
 
-void	ft_philos_routine(t_philo *philo)
+void	ft_philos_routine(t_philo *philo, t_data *data)
 {
-	int status;
-
 	set(philo->data, &philo->last_meal, get_current_time());
 	while (get(philo->data, &philo->data->dead_flag))
 	{
@@ -63,7 +61,7 @@ void	ft_philos_routine(t_philo *philo)
 		usleep(500);
 	}
 	pthread_join(philo->thread, NULL);
-	status = philo->status;
+	data->status = philo->status;
 	ft_free(philo->data);
-	exit(status);
+	exit(data->status);
 }
