@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:26:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 14:35:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/02 09:39:13 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	ft_eat_v2(t_philo *data)
 	if (get(&data->locker, &data->dead))
 		printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
 			- data->start_time, data->index_of_philo, NC);
+	if (data->data->num_of_philos == 1)
+	{
+		pthread_mutex_unlock(&data->forks);
+		return ;
+	}
 	pthread_mutex_lock(data->forks_l);
 	set(&data->locker, &data->last_meal, get_current_time());
 	if (get(&data->locker, &data->dead))
@@ -38,6 +43,11 @@ void	ft_eat(t_philo *data)
 	if (get(&data->locker, &data->dead))
 		printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
 			- data->start_time, data->index_of_philo, NC);
+	if (data->data->num_of_philos == 1)
+	{
+		pthread_mutex_unlock(data->forks_l);
+		return ;
+	}
 	pthread_mutex_lock(&data->forks);
 	set(&data->locker, &data->last_meal, get_current_time());
 	if (get(&data->locker, &data->dead))
@@ -67,6 +77,8 @@ void	*ft_philos_routine(void *args)
 			ft_eat(data);
 		else
 			ft_eat_v2(data);
+		if (data->data->num_of_philos == 1)
+			break ;
 		if (get(&data->locker, &data->dead))
 		{
 			printf("%s %zu %d is sleeping\n%s", YELLOW, get_current_time()
