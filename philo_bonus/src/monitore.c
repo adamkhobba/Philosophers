@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:14:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/02 09:46:22 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/02 10:06:05 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*ft_monitoring(void *args)
 			philo->status = 0;
 			return (NULL);
 		}
-		// usleep(50);
+		// usleep(300);
 	}
 	return (NULL);
 }
