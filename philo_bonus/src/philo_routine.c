@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:52:00 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/03 19:52:18 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/03 19:56:50 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_eat(t_philo *philo)
 	printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
 		- philo->data->start_time, philo->index_of_philo, NC);
 	sem_post(philo->data->sem_print);
+	if (philo->data->num_of_philos == 1)
+		return ;
 	sem_wait(philo->data->forks);
 	set(philo->data, &philo->full, philo->full + 1);
 	if (!get(philo->data, &philo->data->dead_flag)
