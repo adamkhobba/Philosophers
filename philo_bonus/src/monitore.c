@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitore.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:14:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/02 10:06:05 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/03 19:49:41 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*ft_monitoring(void *args)
 			philo->status = 0;
 			return (NULL);
 		}
-		// usleep(300);
+		usleep(500);
 	}
 	return (NULL);
 }

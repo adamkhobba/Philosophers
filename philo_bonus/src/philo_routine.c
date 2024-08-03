@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:52:00 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/02 10:01:50 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/03 19:52:18 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	ft_eat(t_philo *philo)
 	if (!get(philo->data, &philo->data->dead_flag)
 		|| philo->data->num_of_philos == 1)
 		return ;
-	// sem_wait(philo->data->sem_print);
+	sem_wait(philo->data->sem_print);
 	printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
 		- philo->data->start_time, philo->index_of_philo, NC);
 	printf("%s %zu %d is eating\n%s", CYAN, get_current_time()
 		- philo->data->start_time, philo->index_of_philo, NC);
-	// sem_post(philo->data->sem_print);
+	sem_post(philo->data->sem_print);
 	set(philo->data, &philo->last_meal, get_current_time());
 	ft_usleep(philo->data->time_to_eat);
 	sem_post(philo->data->forks);
