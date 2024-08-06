@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitore.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:14:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/03 19:49:41 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/06 18:04:36 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*ft_monitoring(void *args)
 		if (ft_check_dead(philo))
 		{
 			philo->status = 1;
-			return (NULL);
+			break ;
 		}
 		if (philo->data->num_times_to_eat != -1
 			&& philo->full >= (size_t)philo->data->num_times_to_eat)

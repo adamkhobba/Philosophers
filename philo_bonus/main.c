@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:49:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/02 09:52:07 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/06 17:59:36 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_init_struct(char **av, int ac, t_data *data)
 
 int	ft_child_work(t_data *data, int i)
 {
-	if (!i % 2)
-		usleep(500);
+	if (i % 2)
+		ft_usleep(60);
 	data->sem_data = sem_open("sem_data", O_CREAT, 0644, 1);
 	if (data->sem_data == SEM_FAILED)
 		return (1);

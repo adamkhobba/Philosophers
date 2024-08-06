@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:52:00 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/03 19:56:50 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/06 18:08:16 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	ft_eat(t_philo *philo)
 		return ;
 	sem_wait(philo->data->forks);
 	set(philo->data, &philo->full, philo->full + 1);
-	if (!get(philo->data, &philo->data->dead_flag)
-		|| philo->data->num_of_philos == 1)
+	if (!get(philo->data, &philo->data->dead_flag))
 		return ;
 	sem_wait(philo->data->sem_print);
 	printf("%s %zu %d has taken a fork\n%s", BLUE, get_current_time()
@@ -60,7 +59,7 @@ void	ft_philos_routine(t_philo *philo, t_data *data)
 		printf("%s %zu %d is thinking%s\n", GREEN, (get_current_time()
 				- philo->data->start_time), philo->index_of_philo, NC);
 		sem_post(philo->data->sem_print);
-		usleep(500);
+		usleep(100 * philo->data->num_of_philos);
 	}
 	pthread_join(philo->thread, NULL);
 	data->status = philo->status;
