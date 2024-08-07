@@ -17,9 +17,9 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-# include <string.h>
 
 # define NC "\e[0m"
 # define YELLOW "\e[33m"

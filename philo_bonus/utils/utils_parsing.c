@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:26:42 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/07 12:12:12 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 12:19:22 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	ft_args_nbr(int c)
 	return (0);
 }
 
-int ft_checknum(char **str)
+int	ft_checknum(char **str)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (str[i])
@@ -33,9 +33,9 @@ int ft_checknum(char **str)
 	return (0);
 }
 
-int ft_num_agrs(char *str)
+int	ft_num_agrs(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -51,6 +51,7 @@ int ft_num_agrs(char *str)
 	}
 	return (0);
 }
+
 int	ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)

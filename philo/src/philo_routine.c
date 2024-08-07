@@ -6,18 +6,18 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:26:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/07 11:03:56 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 12:18:19 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void ft_print_msg(t_philo *data, char *status, char *color)
+void	ft_print_msg(t_philo *data, char *status, char *color)
 {
-		pthread_mutex_lock(&data->data->lock_print);
-		printf("%s %zu %d %s\n%s", color, get_current_time()
-			- data->start_time, data->index_of_philo, status, NC);
-		pthread_mutex_unlock(&data->data->lock_print);
+	pthread_mutex_lock(&data->data->lock_print);
+	printf("%s %zu %d %s\n%s", color, get_current_time() - data->start_time,
+		data->index_of_philo, status, NC);
+	pthread_mutex_unlock(&data->data->lock_print);
 }
 
 void	ft_eat_v2(t_philo *data)
@@ -81,7 +81,7 @@ void	*ft_philos_routine(void *args)
 			ft_eat_v2(data);
 		usleep(60 * data->data->num_of_philos);
 		if (!get(&data->locker, &data->data->dead_flag)
-			||data->data->num_of_philos == 1)
+			|| data->data->num_of_philos == 1)
 			break ;
 		ft_usleep(data->data->time_to_sleep);
 		if (!get(&data->locker, &data->dead))

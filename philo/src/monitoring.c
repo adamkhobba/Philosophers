@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:15:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/07 10:32:38 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 12:18:00 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ int	ft_monitoring(void *arg)
 	while (data->dead_flag)
 	{
 		if (ft_check_dead(data))
-		{
-
 			return (data->num_of_philos);
-		}
 		if (data->num_times_to_eat != -1
 			&& check_eat_time(data) == data->num_of_philos)
 		{
