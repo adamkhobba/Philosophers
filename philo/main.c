@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/07 10:34:27 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 15:43:36 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@ int	ft_init_mutex(t_data *data)
 
 	i = 0;
 	pthread_mutex_init(&data->lock_print, NULL);
+	pthread_mutex_init(&data->dead_lock, NULL);
 	while (i < data->num_of_philos)
 	{
-		if (pthread_mutex_init(&data->philos[i].forks, NULL)
-			|| pthread_mutex_init(&data->philos[i].locker, NULL))
+		data->philos[i].forks = &data->forks[i];
+		data->philos[i].forks_l = &data->forks[(i + 1)
+			% data->num_of_philos];
+		if (i + 1 == data->num_of_philos)
 		{
-			ft_free_mutex(data, i);
-			return (1);
+			data->philos[i].forks_l = &data->forks[i];
+			data->philos[i].forks = &data->forks[(i + 1)
+				% data->num_of_philos];
 		}
-		data->philos[i].forks_l = &data->philos[(i + 1)
-			% data->num_of_philos].forks;
+		pthread_mutex_init(&data->forks[i], NULL);
 		data->philos[i].full = 0;
 		i++;
 	}
@@ -65,6 +68,10 @@ void	ft_init_struct(char **av, int ac, t_data *data)
 		data->num_times_to_eat = ft_atoi(av[5]);
 	else
 		data->num_times_to_eat = -1;
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_of_philos);
+	if (!data->forks)
+		return ;
+	memset(data->forks, 0, sizeof(pthread_mutex_t) * data->num_of_philos);
 }
 
 int	ft_join(t_data *data)
@@ -90,8 +97,8 @@ int	main(int ac, char **av)
 
 	if (!ft_parsing(av, ac))
 		return (1);
-	ft_init_struct(av, ac, &pdata);
 	pdata.num_of_philos = ft_atoi(av[1]);
+	ft_init_struct(av, ac, &pdata);
 	pdata.philos = (t_philo *)malloc(sizeof(t_philo) * (pdata.num_of_philos));
 	if (!pdata.philos)
 		return (1);
@@ -100,8 +107,8 @@ int	main(int ac, char **av)
 	ft_creation_of_philo(&pdata);
 	if (ft_monitoring(&pdata))
 	{
-		ft_free_mutex(&pdata, pdata.num_of_philos - 1);
 		ft_join(&pdata);
+		ft_free_mutex(&pdata, pdata.num_of_philos - 1);
 		free(pdata.philos);
 		return (1);
 	}

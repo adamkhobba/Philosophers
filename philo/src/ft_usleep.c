@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:10:29 by adam              #+#    #+#             */
-/*   Updated: 2024/07/22 16:17:45 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 15:02:27 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ int	ft_usleep(size_t milliseconds)
 	size_t	start;
 
 	start = get_current_time();
+	if ((int)milliseconds - 20 > 0)
+		usleep((int)milliseconds - 20);
 	while ((get_current_time() - start) < milliseconds)
-	{
-		if (usleep(500))
-			return (1);
-	}
+		usleep(500);
 	return (0);
 }

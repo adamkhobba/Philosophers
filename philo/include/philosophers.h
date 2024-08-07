@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/08/07 12:06:40 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 15:43:53 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 typedef struct s_philo
 {
 	pthread_t		thread;
-	pthread_mutex_t	forks;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	*forks_l;
 	pthread_mutex_t	locker;
 	size_t			last_meal;
@@ -51,11 +51,13 @@ typedef struct s_data
 	size_t			time_to_die;
 	int				num_times_to_eat;
 	pthread_mutex_t	lock_print;
+	pthread_mutex_t	dead_lock;
 	size_t			dead_flag;
 	int				num_of_philos;
 	int				nbr_limits_meals;
 	int				start;
 	int				end;
+	pthread_mutex_t	*forks;
 	t_philo			*philos;
 }					t_data;
 
