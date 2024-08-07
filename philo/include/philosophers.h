@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/08/06 21:11:43 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 12:06:40 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void				set(pthread_mutex_t *locker, size_t *var, size_t value);
 size_t				get(pthread_mutex_t *locker, size_t *var);
 
 // utils
+int					ft_checknum(char **str);
+int					ft_num_agrs(char *str);
 long				ft_atoi(const char *nptr);
 int					ft_strlen(char *str);
 int					ft_args_nbr(int c);
