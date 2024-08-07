@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:04:39 by adam              #+#    #+#             */
-/*   Updated: 2024/07/27 12:08:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/06 21:11:43 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_data
 	size_t			time_to_sleep;
 	size_t			time_to_die;
 	int				num_times_to_eat;
+	pthread_mutex_t	lock_print;
 	size_t			dead_flag;
 	int				num_of_philos;
 	int				nbr_limits_meals;

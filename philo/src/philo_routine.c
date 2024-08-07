@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:26:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/02 09:39:13 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 10:49:38 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,23 @@ void	*ft_philos_routine(void *args)
 			ft_eat_v2(data);
 		if (data->data->num_of_philos == 1)
 			break ;
-		if (get(&data->locker, &data->dead))
-		{
-			printf("%s %zu %d is sleeping\n%s", YELLOW, get_current_time()
-				- data->start_time, data->index_of_philo, NC);
-			ft_usleep(data->data->time_to_sleep);
-			usleep(499);
-		}
-		if (get(&data->locker, &data->dead))
-			printf("%s %zu %d is thinking%s\n", GREEN, (get_current_time()
+		if (!get(&data->locker, &data->dead))
+			break ;
+		usleep(100 * data->data->num_of_philos);
+		if (!get(&data->locker, &data->data->dead_flag))
+			break ;
+		pthread_mutex_lock(&data->data->lock_print);
+		printf("%s %zu %d is sleeping\n%s", YELLOW, get_current_time()
+			- data->start_time, data->index_of_philo, NC);
+		pthread_mutex_unlock(&data->data->lock_print);
+		ft_usleep(data->data->time_to_sleep);
+		if (!get(&data->locker, &data->dead))
+			break ;
+		pthread_mutex_lock(&data->data->lock_print);
+		printf("%s %zu %d is thinking%s\n", GREEN, (get_current_time()
 					- data->start_time), data->index_of_philo, NC);
+		pthread_mutex_unlock(&data->data->lock_print);
+		usleep(499);
 	}
 	return (NULL);
 }

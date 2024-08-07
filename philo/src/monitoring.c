@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:15:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/07/31 12:51:53 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 10:32:38 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	ft_check_dead(t_data *data)
 		if (get_current_time() - get(&data->philos[i].locker,
 				&data->philos[i].last_meal) > data->time_to_die)
 		{
-			data->dead_flag = 0;
+			pthread_mutex_lock(&data->lock_print);
+			set(&data->philos[i].locker, &data->dead_flag, 0);
 			ft_set_dead(data, 0);
 			printf("%s %zu %d died %s\n", RED, (get_current_time()
 					- data->philos[i].start_time),
@@ -74,7 +75,10 @@ int	ft_monitoring(void *arg)
 	while (data->dead_flag)
 	{
 		if (ft_check_dead(data))
+		{
+
 			return (data->num_of_philos);
+		}
 		if (data->num_times_to_eat != -1
 			&& check_eat_time(data) == data->num_of_philos)
 		{
