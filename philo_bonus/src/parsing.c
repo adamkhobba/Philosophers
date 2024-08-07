@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:44 by adam              #+#    #+#             */
-/*   Updated: 2024/07/27 12:31:00 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 12:12:41 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	ft_parsing(char **input, int c)
 	if (!ft_check_negative(input, c))
 		return (0);
 	if (!ft_check_max(input, c))
+		return (0);
+	if (ft_checknum(input))
 		return (0);
 	return (1);
 }

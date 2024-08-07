@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:49:58 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/01 17:00:36 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/07 12:12:19 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void				*ft_monitoring(void *args);
 // void				ft_set_dead(t_data *data, int value);
 
 // utils
+int					ft_checknum(char **str);
+int					ft_num_agrs(char *str);
 int					ft_init_sem(t_data data, sem_t **sem_print, sem_t **forks);
 void				ft_wait(int *id, t_data *pdata);
 int					ft_init_pointers(t_philo *philo, int *id, t_data *data);
