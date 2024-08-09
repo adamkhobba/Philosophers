@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:52:00 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/07 12:19:10 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/09 11:25:18 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_philos_routine(t_philo *philo, t_data *data)
 		printf("%s %zu %d is thinking%s\n", GREEN, (get_current_time()
 				- philo->data->start_time), philo->index_of_philo, NC);
 		sem_post(philo->data->sem_print);
-		usleep(100 * philo->data->num_of_philos);
+		usleep(200 * philo->data->num_of_philos);
 	}
 	pthread_join(philo->thread, NULL);
 	data->status = philo->status;

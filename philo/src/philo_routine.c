@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:26:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/07 15:44:03 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/09 11:24:12 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	*ft_philos_routine(void *args)
 		if (!get(&data->locker, &data->dead))
 			break ;
 		ft_print_msg(data, "is thinking", GREEN);
-		usleep(500);
+		usleep(900);
 	}
 	return (NULL);
 }
