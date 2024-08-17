@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+         #
+#    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 10:23:45 by akhobba           #+#    #+#              #
-#    Updated: 2024/08/01 10:41:49 by akhobba          ###   ########.fr        #
+#    Updated: 2024/08/17 11:36:13 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=thread
 
 SRC = main.c  src/ft_usleep.c src/parsing.c src/monitore.c\
 	src/philo_routine.c src/lock_var.c utils/utils.c\

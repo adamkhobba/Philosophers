@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:34:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/02 09:51:19 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/14 10:52:42 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_kill(int *id, t_data *data)
 	i = 0;
 	while (i < data->num_of_philos)
 	{
-		kill(id[i], SIGKILL);
+		kill(id[i], 15);
 		i++;
 	}
 	return (1);
