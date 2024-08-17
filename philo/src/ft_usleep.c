@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:10:29 by adam              #+#    #+#             */
-/*   Updated: 2024/08/07 15:02:27 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/17 18:54:32 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_usleep(size_t milliseconds)
 
 	start = get_current_time();
 	if ((int)milliseconds - 20 > 0)
-		usleep((int)milliseconds - 20);
+		usleep(((int)milliseconds - 20) * 1000);
 	while ((get_current_time() - start) < milliseconds)
 		usleep(500);
 	return (0);

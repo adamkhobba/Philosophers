@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:49:58 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/07 12:12:19 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/17 19:04:55 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,14 @@ typedef struct s_data
 	size_t			dead_flag;
 	int				num_of_philos;
 	int				nbr_limits_meals;
-	int				status;
+	size_t			status;
 	sem_t			*forks;
 	sem_t			*sem_print;
 	sem_t			*sem_data;
+	sem_t			*eatten;
+	sem_t			*kill_all;
 	int				*id;
+	int				i;
 	t_philo			*philos;
 	size_t			start_time;
 }					t_data;
@@ -80,6 +83,8 @@ void				*ft_monitoring(void *args);
 int					ft_checknum(char **str);
 int					ft_num_agrs(char *str);
 int					ft_init_sem(t_data data, sem_t **sem_print, sem_t **forks);
+long int			ft_sem_getvalue(sem_t *sem);
+int					ft_sem_trywait(sem_t *sem);
 void				ft_wait(int *id, t_data *pdata);
 int					ft_init_pointers(t_philo *philo, int *id, t_data *data);
 long				ft_atoi(const char *nptr);

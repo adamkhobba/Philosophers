@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:15:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/17 11:22:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/17 18:41:25 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	ft_check_dead(t_data *data)
 			printf("%s %zu %d died %s\n", RED, (get_current_time()
 					- data->philos[i].start_time),
 				data->philos[i].index_of_philo, NC);
-			printf("last meal %zu\n", get_current_time() - data->philos[i].last_meal);
 			pthread_mutex_unlock(&data->lock_print);
 			return (1);
 		}

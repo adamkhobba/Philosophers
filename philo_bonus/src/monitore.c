@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:14:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/13 19:58:51 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/17 12:20:44 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_check_dead(t_philo *philo)
 		set(philo->data, &philo->data->dead_flag, 0);
 		printf("%s %zu %d died %s\n", RED, get_current_time()
 			- philo->data->start_time, philo->index_of_philo, NC);
+		sem_post(philo->data->kill_all);
 		return (1);
 	}
 	return (0);

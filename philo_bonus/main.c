@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:49:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/06 17:59:36 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/17 19:02:07 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,41 +45,47 @@ int	ft_child_work(t_data *data, int i)
 	return (0);
 }
 
-int	ft_init_data(t_data pdata, t_philo **philos, int **id)
+int	ft_init_data(t_data *pdata, t_philo **philos, int **id)
 {
+	pdata->eatten = sem_open("eatten", O_CREAT, 0644, 0);
+	if (pdata->eatten == SEM_FAILED)
+		return (1);
+	pdata->kill_all = sem_open("kill_all", O_CREAT, 0644, 0);
+	if (pdata->kill_all == SEM_FAILED)
+		return (1);
 	*id = NULL;
-	*philos = (t_philo *)malloc(sizeof(t_philo) * (pdata.num_of_philos));
+	*philos = (t_philo *)malloc(sizeof(t_philo) * (pdata->num_of_philos));
 	if (!*philos)
 		return (1);
-	*id = (int *)malloc(sizeof(int) * pdata.num_of_philos);
+	*id = (int *)malloc(sizeof(int) * pdata->num_of_philos);
 	if (!*id)
 		return (1);
-	memset(*id, 0, sizeof(int) * pdata.num_of_philos);
+	memset(*id, 0, sizeof(int) * pdata->num_of_philos);
 	return (0);
 }
 
 int	main(int ac, char **av)
 {
 	t_data	pdata;
-	int		i;
 
+	pdata.i = 0;
 	if (!ft_parsing(av, ac))
 		return (1);
+	pdata = (t_data){0};
 	ft_init_struct(av, ac, &pdata);
-	ft_init_data(pdata, &pdata.philos, &pdata.id);
+	ft_init_data(&pdata, &pdata.philos, &pdata.id);
 	ft_init_sem(pdata, &pdata.sem_print, &pdata.forks);
-	i = 0;
-	pdata.id[i] = fork();
-	while (i < pdata.num_of_philos - 1)
+	pdata.id[pdata.i] = fork();
+	while (pdata.i < pdata.num_of_philos - 1)
 	{
-		if (pdata.id[i] != 0)
-			pdata.id[++i] = fork();
+		if (pdata.id[pdata.i] != 0)
+			pdata.id[++pdata.i] = fork();
 		else
 			break ;
 	}
-	if (pdata.id[i] == 0)
+	if (pdata.id[pdata.i] == 0)
 	{
-		if (ft_child_work(&pdata, i))
+		if (ft_child_work(&pdata, pdata.i))
 			return (1);
 		return (0);
 	}

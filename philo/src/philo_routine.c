@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:26:03 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/17 11:36:00 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/17 18:41:43 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	*ft_philos_routine(void *args)
 			break ;
 		ft_print_msg(philo, "is thinking", GREEN);
 		if (philo->data->num_of_philos > 100)
-		usleep(50 * philo->data->num_of_philos);
+			usleep(50 * philo->data->num_of_philos);
 		else
-		usleep(200 * philo->data->num_of_philos);
+			usleep(200 * philo->data->num_of_philos);
 	}
 	return (NULL);
 }
