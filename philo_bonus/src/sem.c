@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 12:03:44 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/17 19:03:19 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/18 15:19:06 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	ft_sem_trywait(sem_t *sem)
 {
-	_Atomic static long int	sval;
+	long int	sval;
 
 	sval = sem->__align;
-	if (sval < 0)
+	if (sval == 0)
 		return (0);
 	sem_wait(sem);
 	return (1);
@@ -25,7 +25,7 @@ int	ft_sem_trywait(sem_t *sem)
 
 long int	ft_sem_getvalue(sem_t *sem)
 {
-	_Atomic static long int	sval;
+	long int	sval;
 
 	sval = sem->__align;
 	return (sval);
