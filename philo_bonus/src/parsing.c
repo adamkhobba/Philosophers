@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 08:45:44 by adam              #+#    #+#             */
-/*   Updated: 2024/08/07 12:12:41 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/21 10:45:42 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,27 @@ int	ft_check_max(char **input, int c)
 
 int	ft_parsing(char **input, int c)
 {
-	if (!ft_args_nbr(c))
-		return (0);
 	if (!ft_isnull(input, c))
+	{
+		printf("ERROR: invalid input\n");
 		return (0);
+	}
 	if (!ft_check_negative(input, c))
+	{
+		printf("ERROR: negative numbers are not allowed\n");
 		return (0);
+	}
 	if (!ft_check_max(input, c))
+	{
+		printf("ERROR: numbers are too big\n");
 		return (0);
+	}
 	if (ft_checknum(input))
+	{
+		printf("ERROR: invalid input\n");
+		return (0);
+	}
+	if (!ft_args_nbr(c))
 		return (0);
 	return (1);
 }

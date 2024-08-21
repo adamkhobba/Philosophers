@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:34:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/18 15:18:29 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/21 11:06:14 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,6 @@ void	ft_wait(int *id, t_data *data)
 	if (eatten != data->num_of_philos)
 		ft_kill(id, data);
 }
-
-// void	ft_wait(int *id, t_data *data)
-// {
-// 	int	status;
-
-// 	status = -1;
-// 	while (waitpid(-1, &status, 0) != -1)
-// 	{
-// 		printf("status = %d\n", WEXITSTATUS(status));
-// 		if (WEXITSTATUS(status) == 1)
-// 			ft_kill(id, data);
-// 	}
-// }
 
 void	ft_unlink(void)
 {
