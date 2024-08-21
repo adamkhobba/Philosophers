@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/16 11:24:23 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/21 10:38:31 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ int	ft_init_mutex(t_data *data)
 	pthread_mutex_init(&data->dead_lock, NULL);
 	while (i < data->num_of_philos)
 	{
-		data->philos[i].forks = &data->forks[i];
-		data->philos[i].forks_l = &data->forks[(i + 1)
-			% data->num_of_philos];
-		if (i + 1 == data->num_of_philos)
+		if (i % 2 == 0)
+		{
+			data->philos[i].forks = &data->forks[i];
+			data->philos[i].forks_l = &data->forks[(i + 1)
+				% data->num_of_philos];
+		}
+		else
 		{
 			data->philos[i].forks_l = &data->forks[i];
 			data->philos[i].forks = &data->forks[(i + 1)
