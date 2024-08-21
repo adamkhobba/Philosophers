@@ -57,11 +57,6 @@ Makefile.gen
 *.idb
 *.pdb
 
-# Random folder
-.vscode
-.idea
-cmake-build-debug
-
 # Kernel Module Compile Results
 *.mod*
 *.cmd
@@ -76,4 +71,4 @@ dkms.conf
 a.out
 a
 main
-Philo
+philo_bonus
