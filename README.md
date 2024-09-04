@@ -109,3 +109,7 @@ Semaphores are just normal variables used to coordinate the activities of multip
 ### Named vs unnamed semaphore
 POSIX semaphores can be unnamed or named. Unnamed semaphores are allocated in process memory and initialized. Unnamed semaphores might be usable by more than one process, depending on how the semaphore is allocated and initialized. Unnamed semaphores are either private, inherited through fork(), or are protected by access protections of the regular file in which they are allocated and mapped.
 Named semaphores are like process-shared semaphores, except that named semaphores are referenced with a pathname rather than a pshared value. Named semaphores are sharable by several processes. Named semaphores have an owner user-id, group-id, and a protection mode.
+
+![Screenshot from 2024-09-04 11-40-09](https://github.com/user-attachments/assets/4dfff0d8-0e10-4ff4-a83f-7896f5f69d10)
+
+
